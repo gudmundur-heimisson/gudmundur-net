@@ -21,7 +21,7 @@ app.config.from_object(__name__)
 
 db = Database(app)
 
-class IndividualValues(db.Model):
+class BaseStats(db.Model):
     attack = IntegerField()
     defense = IntegerField()
     name = CharField(max_length=128)
@@ -43,38 +43,44 @@ class Names(db.Model):
         db_table = 'names'
 
 class PokeResource(RestResource):
-    paginate_by = 1000;
+    pass
+
+class IvResource(PokeResource):
+    paginate_by = 1000
+
+class NameResource(PokeResource):
+    paginate_by = 1000
 
 
 api = RestAPI(app)
 api.register(Names, PokeResource)
-api.register(IndividualValues, PokeResource)
+api.register(BaseStats, PokeResource)
 api.setup()
 
 @app.route("/")
 def index():
-  return render_template('index.html')
+    return render_template('index.html')
 
 @app.route("/contact")
 def contact():
-  return render_template('contact.html')
+    return render_template('contact.html')
 
 @app.route("/resume")
 def resume():
-  return render_template('resume.html')
+    return render_template('resume.html')
 
 @app.route("/kde")
 def kde():
-  return render_template('kde.html')
+    return render_template('kde.html')
 
-@app.route("/iv_browser")
+@app.route("/base-stats-browser")
 def iv_browser():
-    return render_template('iv_browser.html')
+      return render_template('base-stats-browser.html')
 
 @app.route("/test")
 def test():
-  return sys.executable
+    return sys.executable
 
 if __name__ == "__main__":
-  app.debug = True
-  app.run()
+    app.debug = True
+    app.run()
