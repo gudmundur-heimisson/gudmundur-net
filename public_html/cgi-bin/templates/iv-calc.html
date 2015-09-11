@@ -4,7 +4,52 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-
+<h1>Pokémon Individual Value Calculator</h1>
+<div id="iv-calc-inputs">
+    <div id="pokedex-number-container">
+        <label for="pokedex-number">Pokédex #:</label>
+        <input id="pokedex-number" type="text">
+    </div>
+    <div id="pokemon-name-container">
+        <label for="pokemon-name">Name:</label>
+        <input id="pokemon-name" type="text">
+    </div>
+    <div id="pokemon-level-container">
+        <label for="pokemon-level">Level:</label>
+        <input id="pokemon-level" type="number" min="1" max="100">
+    </div>
+    <div id="pokemon-nature-container">
+        <label for="pokemon-nature">Nature:</label>
+        <select name="pokemon-nature" id="pokemon-nature">
+        </select>
+    </div>
+    <div id="stats-container">
+        <div id="hp-stat-container">
+            <label for="hp-stat">HP:</label>
+            <input id="hp-stat" type="number" min="1">
+        </div>
+        <div id="atk-stat-container">
+            <label for="atk-stat">Attack:</label>
+            <input id="atk-stat" type="number" min="1">
+        </div>
+        <div id="def-stat-container">
+            <label for="def-stat">Defense:</label>
+            <input id="def-stat" type="number" min="1">
+        </div>
+        <div id="spatk-stat-container">
+            <label for="spatk-stat">Special Attack:</label>
+            <input id="spatk-stat" type="number" min="1">
+        </div>
+        <div id="spdef-stat-container">
+            <label for="spdef-stat">Special Defense:</label>
+            <input id="spdef-stat" type="number" min="1">
+        </div>
+        <div id="spd-stat-container">
+            <label for="spd-stat">Speed:</label>
+            <input id="spd-stat" type="number" min="1">
+        </div>
+    </div>
+</div>
 {% endblock %}
 {% block footer %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_calc.js') }}"></script>
