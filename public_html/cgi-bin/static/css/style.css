@@ -1,0 +1,184 @@
+body {
+    background: none repeat scroll 0 0 #0072C6;
+    max-width: 780px;
+    margin: 20px auto;
+    padding: 0 20px;
+    font-size: 17px;
+    font-family: 'Georgia', sans-serif;
+}
+
+nav ul, nav ol {
+    margin: 10px 0px 10px 0px;
+    padding-left: 15px;
+    float: left;
+    list-style: none outside none;
+}
+
+footer {
+    margin: 20px auto;
+}
+
+footer a {
+    color: rgba(0,0,0, 0.5);
+    text-decoration: none;
+}
+
+#menu-wrapper {
+    height: 2.3em;
+    background-color: #F0F0F0;
+    border-radius: 5px 5px 0px 0px;
+    position: relative;
+}
+
+nav#main-menu li {
+    float: left;
+}
+
+nav#main-menu li a {
+    border: 1px solid transparent;
+    display: block;
+    text-decoration: none;
+    color: #000;
+    padding: 0px 5px 0 5px;
+}
+
+nav#main-menu li a:hover {
+    border: 1px solid rgba(0,0,0, 0.5);
+}
+
+nav#main-menu ul {
+}
+
+#container {
+
+}
+
+#content-wrapper {
+    background-color: #fff;
+    border-radius: 0px 0px 5px 5px;
+    position: relative;
+    padding: 20px 20px 20px 20px;
+}
+
+#content {
+    justify-content: left;
+}
+
+#content p {
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
+div#resume-pdf-notice {
+    
+}
+
+div.resume-block {
+    margin-bottom: 30px;
+}
+
+div.resume-block #resume-contact p {
+    margin-top: 0px;
+    margin-bottom: 4px;
+}
+
+div.resume-block #tech-skills p {
+    margin-top: 0px;
+    margin-bottom: 4px;
+}
+
+h1 {
+    margin-top: 10px;
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+h3 {
+    font-size: 18px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+div.resume-block div.resume-block-content {
+    margin-left: 20px;
+}
+
+div.resume-block div.resume-block-content div.resume-subitem {
+    margin-left: 20px;
+}
+
+div.resume-block div.resume-block-content div.resume-subitem p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+div.resume-block div.resume-block-content p.employer-description {
+    font-style: italic;
+}
+
+div.resume-block div.resume-block-content p.job-title-duration {
+    font-weight: bold;
+}
+
+div.resume-block div.resume-block-content p.job-description {
+    
+}
+
+div#education ul {
+    margin-top: 5px;
+}
+
+canvas#KDE-canvas {
+	width:100%; 
+}
+
+canvas#K-canvas {
+	display: block;
+}
+
+div#K-container {
+	margin-bottom: 10px;
+}
+
+div#PDF-container {
+	margin-bottom: 10px;
+}
+
+div#h-container {
+	margin-bottom: 10px;
+}
+
+div#n-container {
+	margin-bottom: 10px;
+}
+
+input#h-value {
+	width: 50px;
+}
+
+input#n-value {
+	width: 50px;
+}
+
+select#K-func {
+	width: 180px;
+}
+
+select#PDF-select {
+	width: 180px;
+}
+
+div#K-container label{
+	margin-bottom: 15px;
+	font-size: 20px;
+}
+
+div#K-container {
+	margin-bottom: 15px;
+}

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}Pokémon IV Browser{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+<div id="iv-table-container">
+    <table id="iv-table" class="display" cellspacing="0">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>HP</th>
+                <th>Atk</th>
+                <th>Def</th>
+                <th>SpAtk</th>
+                <th>SpDef</th>
+                <th>Spd</th>
+                <th>Sum</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Loading...</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block footer %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery/jquery.dataTables.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_browser.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.dataTables.css') }}">
+{{ super () }}
+{% endblock %}
