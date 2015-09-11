@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %} Pokémon Individual Value Calculator{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+
+{% endblock %}
+{% block footer %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_calc.js') }}"></script>
+{{ super() }}
+{% endblock %}

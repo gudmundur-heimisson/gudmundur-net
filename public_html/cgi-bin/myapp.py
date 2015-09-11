@@ -74,8 +74,12 @@ def kde():
     return render_template('kde.html')
 
 @app.route("/base-stats-browser")
-def iv_browser():
+def base_stats_browser():
       return render_template('base-stats-browser.html')
+
+@app.route("/iv-calc")
+def iv_calc():
+    return render_template('iv-calc.html')
 
 @app.route("/test")
 def test():
