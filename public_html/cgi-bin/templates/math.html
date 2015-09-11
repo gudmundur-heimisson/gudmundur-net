@@ -7,39 +7,39 @@
 <h1>Kernel Density Estimators</h1>
 <canvas id="KDE-canvas">Your browser does not support the HTML5 canvas tag.</canvas>
 <div id="kde-inputs-container">
-	<div id="K-container">
-		<label for="K-func">Kernel:</label>
-		<select name="K-func" id="K-func">
-			<option value="normal" selected="selected">Normal</option>		
-			<option value="uniform">Rectangular</option>
-			<option value="epanechnikov">Epanechnikov</option>
-		</select>
-		<canvas id="K-canvas">Your browser does not support the HTML5 canvas tag.</canvas>
-	</div>
-	<div id="PDF-container">
-		<label for="PDF-select">Sample PDF:</label>
-		<select name="PDF-select" id="PDF-select">
-			<option value="normal" selected="selected">Normal</option>
-			<option value="uniform">Uniform</option>
-			<option value="exponential">Exponential</option>
-		</select>
-	</div>
-	<div id="h-container">
-		<label for="h-value">Smoothing parameter:</label>
-		<input id="h-value" type="text" readonly>
-		<div id="h-range"></div>
-		<input type="button" value="Auto-smooth" id="normal-h">
-	</div>
-	<div id="n-container">
-		<label for="n-value">Number of samples:</label>
-		<input id="n-value" type="text" readonly>
-		<div id="n-range"></div>
-	</div>
-	<div >
-		<input type="button" value="Toggle PDF" id="pdf-button">
-		<input type="button" value="Toggle KDE" id="kde-button">
-		<input type="button" value="Show samples" id="samples-button">
-	</div>
+    <div id="K-container">
+        <label for="K-func">Kernel:</label>
+        <select name="K-func" id="K-func">
+            <option value="normal" selected="selected">Normal</option>      
+            <option value="uniform">Rectangular</option>
+            <option value="epanechnikov">Epanechnikov</option>
+        </select>
+        <canvas id="K-canvas">Your browser does not support the HTML5 canvas tag.</canvas>
+    </div>
+    <div id="PDF-container">
+        <label for="PDF-select">Sample PDF:</label>
+        <select name="PDF-select" id="PDF-select">
+            <option value="normal" selected="selected">Normal</option>
+            <option value="uniform">Uniform</option>
+            <option value="exponential">Exponential</option>
+        </select>
+    </div>
+    <div id="h-container">
+        <label for="h-value">Smoothing parameter:</label>
+        <input id="h-value" type="text" readonly>
+        <div id="h-range"></div>
+        <input type="button" value="Auto-smooth" id="normal-h">
+    </div>
+    <div id="n-container">
+        <label for="n-value">Number of samples:</label>
+        <input id="n-value" type="text" readonly>
+        <div id="n-range"></div>
+    </div>
+    <div >
+        <input type="button" value="Toggle PDF" id="pdf-button">
+        <input type="button" value="Toggle KDE" id="kde-button">
+        <input type="button" value="Show samples" id="samples-button">
+    </div>
 </div>
 {% endblock %}
 {% block footer %}
