@@ -9,6 +9,8 @@ from flask import Flask, render_template
 from flask_peewee.db import Database
 from flask_peewee.rest import RestAPI, RestResource
 
+from pokemon import natures
+
 DATABASE = {
     'name': 'gudmvlpz_pokemon_gen6',
     'engine': 'peewee.MySQLDatabase',
@@ -79,7 +81,7 @@ def base_stats_browser():
 
 @app.route("/iv-calc")
 def iv_calc():
-    return render_template('iv-calc.html')
+    return render_template('iv-calc.html', natures=sorted(natures, key=lambda x: x.name))
 
 @app.route("/test")
 def test():

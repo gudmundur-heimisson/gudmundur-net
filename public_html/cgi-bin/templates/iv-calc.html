@@ -21,37 +21,34 @@
     <div id="pokemon-nature-container">
         <label for="pokemon-nature">Nature:</label>
         <select name="pokemon-nature" id="pokemon-nature">
+        {% for nature in natures %}
+            <option value="{{ nature.name }}">{{ nature.name }}</option>
+        {% endfor %}
         </select>
     </div>
+    {% with tags, labels = (["hp", "atk", "def", "spatk", "spdef", "spd"], ["HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed"]) %}
     <div id="stats-container">
-        <div id="hp-stat-container">
-            <label for="hp-stat">HP:</label>
-            <input id="hp-stat" type="number" min="1">
-        </div>
-        <div id="atk-stat-container">
-            <label for="atk-stat">Attack:</label>
-            <input id="atk-stat" type="number" min="1">
-        </div>
-        <div id="def-stat-container">
-            <label for="def-stat">Defense:</label>
-            <input id="def-stat" type="number" min="1">
-        </div>
-        <div id="spatk-stat-container">
-            <label for="spatk-stat">Special Attack:</label>
-            <input id="spatk-stat" type="number" min="1">
-        </div>
-        <div id="spdef-stat-container">
-            <label for="spdef-stat">Special Defense:</label>
-            <input id="spdef-stat" type="number" min="1">
-        </div>
-        <div id="spd-stat-container">
-            <label for="spd-stat">Speed:</label>
-            <input id="spd-stat" type="number" min="1">
-        </div>
+        <h2>Pokémon Stats</h2>
+        {% for i in range(6) %}
+            <div id="{{ tags[i] }}-stats-container">
+                <label for="{{ tags[i] }}-stat">{{ labels[i] }}:</label>
+                <input id="{{ tags[i] }}-stat" type="number" min="1">
+            </div>
+        {% endfor %}
     </div>
+    <div id="evs-container">
+        <h2>Pokémon EVs</h2>
+        {% for i in range(6) %}
+            <div id="{{ tags[i] }}-evs-container">
+                <label for="{{ tags[i] }}-ev"> {{ labels[i] }} EV:</label>
+                <input id="{{ tags[i] }}-ev" type="number" min="0" default="0" value="0">
+            </div>
+        {% endfor %}
+    </div>
+    {% endwith %}
 </div>
 {% endblock %}
 {% block footer %}
-<script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_calc.js') }}"></script>
-{{ super() }}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_calc.js') }}"></script>
+    {{ super() }}
 {% endblock %}
