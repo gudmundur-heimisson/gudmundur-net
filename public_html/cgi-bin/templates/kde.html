@@ -43,10 +43,10 @@
 </div>
 {% endblock %}
 {% block footer %}
-<script type="text/javascript" src="{{ url_for('static', filename='js/math/Axis.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/math/Integrate.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/math/Stats.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/math/NumJS.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/math/kde.js') }}"></script>
-{{ super() }}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/math/Axis.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/math/Integrate.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/math/Stats.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/math/NumJS.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/math/kde.js') }}"></script>
+    {{ super() }}
 {% endblock %}
