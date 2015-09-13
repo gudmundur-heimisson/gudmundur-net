@@ -47,16 +47,16 @@ class Names(db.Model):
 class PokeResource(RestResource):
     pass
 
-class IvResource(PokeResource):
+class BaseStatsResource(PokeResource):
     paginate_by = 1000
 
-class NameResource(PokeResource):
+class NamesResource(PokeResource):
     paginate_by = 1000
 
 
 api = RestAPI(app)
-api.register(Names, PokeResource)
-api.register(BaseStats, PokeResource)
+api.register(Names, NamesResource)
+api.register(BaseStats, BaseStatsResource)
 api.setup()
 
 @app.route("/")

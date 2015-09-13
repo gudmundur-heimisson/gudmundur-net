@@ -1,5 +1,21 @@
+var natures = [["Hardy","Lonely","Adamant","Naughty","Brave"],
+               ["Bold","Docile","Impish","Lax","Relaxed"],
+               ["Modest","Mild","Bashful","Rash","Quiet"],
+               ["Calm","Gentle","Careful","Quirky","Sassy"],
+               ["Timid", "Hasty", "Jolly","Naive","Serious"]];
 
-function computeStats(iv, base, ev, level, nature, isHP=false) {
+natureMatrices = {};
+
+for (var i=0; i<5; ++i) {
+    for (var j=0; j<5; ++j) {
+        var m = [0, 0, 0, 0, 0];
+        ++m[i];
+        --m[j];
+        natureMatrices[natures[i][j]] = m;
+    }
+}
+
+function computeStats(iv, base, ev, level, nature, isHP) {
     var c = isHP ? level+10 : 5;
     return Math.floor( nature*Math.floor(level*( iv+2*base+Math.floor(ev/4) )/100 + c));
 }
@@ -17,12 +33,13 @@ function Pokemon(level, baseStats, ivs, evs, nature) {
 }
 
 function estimateIVs(level, baseStats, evs, nature, stats) {
+    var natureMatrix = natureMatrices[nature];
     var ivs = new Array(6);
     for (var i=0; i<6; ++i) {
         var s = stats[i]
         var b = 2*baseStats[i];
         var e = Math.floor(evs[i]/4);
-        var n = nature[i];
+        var n = natureMatrix[i];
         var c = i==0 ? 10+level:5;
         var est = function(e1, e2) {return (100.0/level)*((s+e2)/n + e1 - c) - b - e;}
         if (n == 1.0) {

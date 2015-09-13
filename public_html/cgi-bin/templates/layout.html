@@ -3,11 +3,11 @@
     <head>
         {% block head %}
         <meta charset="UTF-8">     
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui.structure.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui.theme.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui/jquery-ui.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui/jquery-ui.structure.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui/jquery-ui.theme.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery/jquery-2.1.1.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery/jquery-2.1.4.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='js//jquery/jquery-ui.js') }}"></script>
         <title>{% block title %}{% endblock %} - Gudmundur Heimisson</title>
         {% endblock %}
