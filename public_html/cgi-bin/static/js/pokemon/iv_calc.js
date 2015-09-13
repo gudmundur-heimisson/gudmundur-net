@@ -8,9 +8,9 @@ natureMatrices = {};
 
 for (var i=0; i<5; ++i) {
     for (var j=0; j<5; ++j) {
-        var m = [0, 0, 0, 0, 0];
-        ++m[i];
-        --m[j];
+        var m = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
+        m[i+1] = 0.1 + m[i];
+        m[j+1] = -0.1 + m[j];
         natureMatrices[natures[i][j]] = m;
     }
 }
@@ -52,10 +52,14 @@ function estimateIVs(level, baseStats, evs, nature, stats) {
         var l = Math.ceil(lower);
         var u = Math.floor(upper);
         ivs[i] = new Array();
-        for (var j=0; j<=u-l; ++j) {
-            var iv = l+j
-            if (s == computeStats(iv, baseStats[i], evs[i], level, n, isHP=i==0)) {
-                ivs[i].push(iv);
+        if (!(l>=0 && u<=31)) {
+            ivs[i].push(NaN);
+        } else {
+            for (var j=0; j<=u-l; ++j) {
+                var iv = l+j
+                if (s == computeStats(iv, baseStats[i], evs[i], level, n, isHP=i==0)) {
+                    ivs[i].push(iv);
+                }
             }
         }
     }

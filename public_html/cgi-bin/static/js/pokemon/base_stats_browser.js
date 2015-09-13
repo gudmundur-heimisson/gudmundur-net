@@ -1,8 +1,8 @@
 $(document).ready( function() {
-    $('#iv-table').dataTable( {
+    $('#base-stats-table').dataTable( {
         "processing": true,
         "ajax": {
-            "url": "/api/basestats",
+            "url": "/api/basestats/",
             "dataSrc": "objects"
         },
         "columns": [

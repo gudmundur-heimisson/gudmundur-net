@@ -1,5 +1,6 @@
 var inputs = {"stat": {},
               "ev": {}};
+var ivEsts = new Array(6);
 
 function populateNamesDropdown( search, names ) {
     var subNames;
@@ -33,9 +34,31 @@ $.ajax({
         names.sort();
         var search = $("input#name-search").value;
         populateNamesDropdown(search, names);
+        changeOutput();
     }
 });
 
+var changeOutput = function() {
+    if (pokedata != undefined) {
+        var pokemon = $.grep(pokedata, function(pokemon) {
+            if (pokemon.name == inputs.name) {
+                return true;
+            }
+        });
+        pokemon = pokemon[0];
+        var baseStats = [pokemon.health_points, pokemon.attack,
+                         pokemon.defense, pokemon.special_attack,
+                         pokemon.special_defense, pokemon.speed];
+        var stats = [inputs.stat.hp, inputs.stat.atk, inputs.stat.def,
+                     inputs.stat.spatk, inputs.stat.spdef, inputs.stat.spd];
+        var evs = [inputs.ev.hp, inputs.ev.atk, inputs.ev.def,
+                   inputs.ev.spatk, inputs.ev.spdef, inputs.ev.spd];
+        ivEsts = estimateIVs(inputs.level, baseStats, evs, inputs.nature, stats);
+        $("div#iv-ests-container div").each(function(index, element) {
+            $("input", element).val(ivEsts[index].join(", "));
+        });
+    }
+}
 
 var recordInput = function(element) {
     var id = element.attr("id");
@@ -44,9 +67,9 @@ var recordInput = function(element) {
         var val = element.val();
         val = val == "" ? undefined:val;
         if (parts.length == 2) {
-            inputs[parts[1]][parts[0]] = val;
+            inputs[parts[1]][parts[0]] = Number(val);
         } else {
-            inputs[id] = val;
+            inputs[id] = Number(val);
         }
     }
 }
