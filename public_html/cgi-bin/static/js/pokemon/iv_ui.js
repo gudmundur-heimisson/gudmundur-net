@@ -54,8 +54,12 @@ var changeOutput = function() {
         var evs = [inputs.ev.hp, inputs.ev.atk, inputs.ev.def,
                    inputs.ev.spatk, inputs.ev.spdef, inputs.ev.spd];
         ivEsts = estimateIVs(inputs.level, baseStats, evs, inputs.nature, stats);
-        $("div#iv-ests-container div").each(function(index, element) {
-            $("input", element).val(ivEsts[index].join(", "));
+        $("div#iv-ests-container input").each(function(index, element) {
+            if (ivEsts == undefined || ivEsts[index] == undefined) {
+                $(element).val("");
+            } else {
+                $(element).val(ivEsts[index].join(", "));
+            }
         });
     }
 }
@@ -88,18 +92,18 @@ var selectChange = function(event) {
     changeOutput();
 }
 
-$("div#iv-calc-inputs input").each(function(index, element) {
+$("div#iv-calc input").each(function(index, element) {
     recordInput($(element));
 });
 
-$("div#iv-calc-inputs select").each(function(index, element) {
+$("div#iv-calc select").each(function(index, element) {
     recordSelect($(element));
 });
 
 $(function() {
-    $("div#iv-calc-inputs input").keyup(inputChange);
-    $("div#iv-calc-inputs input").change(inputChange);
-    $("div#iv-calc-inputs select").change(selectChange);
+    $("div#iv-calc input").keyup(inputChange);
+    $("div#iv-calc input").change(inputChange);
+    $("div#iv-calc select").change(selectChange);
     $("input#name-search")
     .keyup(function(event) {
         event.preventDefault();

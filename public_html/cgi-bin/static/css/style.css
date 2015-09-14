@@ -135,50 +135,50 @@ div#education ul {
 }
 
 canvas#KDE-canvas {
-	width:100%; 
+    width:100%; 
 }
 
 canvas#K-canvas {
-	display: block;
+    display: block;
 }
 
 div#K-container {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 div#PDF-container {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 div#h-container {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 div#n-container {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 input#h-value {
-	width: 50px;
+    width: 50px;
 }
 
 input#n-value {
-	width: 50px;
+    width: 50px;
 }
 
 select#K-func {
-	width: 180px;
+    width: 180px;
 }
 
 select#PDF-select {
-	width: 180px;
+    width: 180px;
 }
 
 div#K-container label{
-	margin-bottom: 15px;
-	font-size: 20px;
+    margin-bottom: 15px;
+    font-size: 20px;
 }
 
 div#K-container {
-	margin-bottom: 15px;
+    margin-bottom: 15px;
 }

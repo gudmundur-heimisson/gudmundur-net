@@ -2,61 +2,89 @@
 {% block title %} Pokémon Individual Value Calculator{% endblock %}
 {% block head %}
     {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pokemon-iv-calculator.css') }}">
 {% endblock %}
 {% block content %}
 <h1>Pokémon Individual Value Calculator</h1>
-<div id="iv-calc-inputs">
-    <div id="pokedex-container" hidden="true">
-        <label for="pokedex">Pokédex #:</label>
-        <input id="pokedex" type="number">
-    </div>
-    <div id="name-container">
-        <label for="name-search">Name:</label>
-        <input id="name-search" type="text">
-        <select name="name" id="name"></select>
-    </div>
-    <div id="level-container">
-        <label for="level">Level:</label>
-        <input id="level" type="number" min="1" max="100">
-    </div>
-    <div id="pokemon-nature-container">
-        <label for="nature">Nature:</label>
-        <select name="nature" id="nature">
-        {% for nature in natures %}
-            <option value="{{ nature.name }}">{{ nature.name }}</option>
-        {% endfor %}
-        </select>
+<div id="iv-calc">
+    <div id="misc-container">
+        <h2>Pokémon Species</h2>
+        <div id="pokedex-container" hidden="true">
+            <label for="pokedex">Pokédex #:</label>
+            <input id="pokedex" type="number" class="iv-calc-input">
+        </div>
+        <div id="name-container">
+            <div id="name-label" class="iv-calc-label">
+                <label for="name-search">Name:</label>
+            </div>
+            <div id="name-input" class="iv-calc-input">
+                <input id="name-search" type="text">
+            </div>
+            <div id="name-select" class="iv-calc-select">
+                <select name="name" id="name"></select>
+            </div>
+        </div>
+        <div id="level-container">
+            <div id="level-label" class="iv-calc-label">
+                <label for="level">Level:</label>
+            </div>
+            <div id="level-input" class="iv-calc-input">
+                <input id="level" type="number" min="1" max="100">
+            </div>
+        </div>
+        <div id="pokemon-nature-container">
+            <div id="nature-label" class="iv-calc-label">
+                <label for="nature">Nature:</label>
+            </div>
+            <div id="nature-select" class="iv-calc-input">
+                <select name="nature" id="nature">
+                {% for nature in natures %}
+                    <option value="{{ nature.name }}">{{ nature.name }}</option>
+                {% endfor %}
+                </select>
+            </div>
+        </div>
     </div>
     {% with tags, labels = (["hp", "atk", "def", "spatk", "spdef", "spd"], ["HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed"]) %}
     <div id="stats-container">
-        <h2>Pokémon Stats</h2>
+        <h2>Stats</h2>
         {% for i in range(6) %}
             <div id="{{ tags[i] }}-stats-container">
-                <div id="stat-{{ i }}" hidden="true"></div>
-                <label for="{{ tags[i] }}-stat">{{ labels[i] }}:</label>
-                <input id="{{ tags[i] }}-stat" type="number" min="1">
+                <div id="{{ tags[i] }}-stat-label-container" class="iv-calc-label">
+                    <label for="{{ tags[i] }}-stat">{{ labels[i] }}:</label>
+                </div>
+                <div id="{{ tags[i] }}-stat-input-container" class="iv-calc-input">
+                    <input id="{{ tags[i] }}-stat" type="number" min="1">
+                </div>
             </div>
         {% endfor %}
     </div>
     <div id="evs-container">
-        <h2>Pokémon EVs</h2>
+        <h2>EVs</h2>
         {% for i in range(6) %}
             <div id="{{ tags[i] }}-evs-container">
-                <div id="ev-{{ i }}" hidden="true"></div>
-                <label for="{{ tags[i] }}-ev">{{ labels[i] }} EV:</label>
-                <input id="{{ tags[i] }}-ev" type="number" min="0" value="0">
+                <div id="{{ tags[i] }}-ev-label-container" class="iv-calc-label" hidden="true">
+                    <label for="{{ tags[i] }}-ev">{{ labels[i] }} EV:</label>
+                </div>
+                <div id="{{ tags[i] }}-ev" class="iv-calc-input">
+                    <input id="{{ tags[i] }}-ev" type="number" min="0" value="0">
+                </div>
             </div>
         {% endfor %}
     </div>
-</div>
-<div id="iv-ests-container">
-    <h2>Pokémon IV Estimates</h2>
-    {% for i in range(6) %}
-        <div id="{{ tags[i] }}-iv-est-container">
-            <label for="{{ tags[i] }}-iv-est">{{ labels[i] }} IV:</label>
-            <input id="{{ tags[i] }}-iv-est" type="text" readonly>
-        </div>
-    {% endfor %}
+    <div id="iv-ests-container">
+        <h2>IVs</h2>
+        {% for i in range(6) %}
+            <div id="{{ tags[i] }}-iv-est-container">
+                <div id="{{ tags[i] }}-iv-calc-label" class="iv-calc-label">
+                    <label for="{{ tags[i] }}-iv-est" hidden="true">{{ labels[i] }} IV:</label>
+                </div>
+                <div id="{{ tags[i] }}-iv-calc-input" class="iv-calc-input">
+                    <input id="{{ tags[i] }}-iv-est" type="text" readonly>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </div>
     {% endwith %}
 {% endblock %}
