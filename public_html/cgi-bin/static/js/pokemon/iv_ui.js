@@ -45,22 +45,24 @@ var changeOutput = function() {
                 return true;
             }
         });
-        pokemon = pokemon[0];
-        var baseStats = [pokemon.health_points, pokemon.attack,
-                         pokemon.defense, pokemon.special_attack,
-                         pokemon.special_defense, pokemon.speed];
-        var stats = [inputs.stat.hp, inputs.stat.atk, inputs.stat.def,
-                     inputs.stat.spatk, inputs.stat.spdef, inputs.stat.spd];
-        var evs = [inputs.ev.hp, inputs.ev.atk, inputs.ev.def,
-                   inputs.ev.spatk, inputs.ev.spdef, inputs.ev.spd];
-        ivEsts = estimateIVs(inputs.level, baseStats, evs, inputs.nature, stats);
-        $("div#iv-ests-container input").each(function(index, element) {
-            if (ivEsts == undefined || ivEsts[index] == undefined) {
-                $(element).val("");
-            } else {
-                $(element).val(ivEsts[index].join(", "));
-            }
-        });
+        if (pokemon != undefined && pokemon.length > 0) {
+            pokemon = pokemon[0];
+            var baseStats = [pokemon.health_points, pokemon.attack,
+                             pokemon.defense, pokemon.special_attack,
+                             pokemon.special_defense, pokemon.speed];
+            var stats = [inputs.stat.hp, inputs.stat.atk, inputs.stat.def,
+                         inputs.stat.spatk, inputs.stat.spdef, inputs.stat.spd];
+            var evs = [inputs.ev.hp, inputs.ev.atk, inputs.ev.def,
+                       inputs.ev.spatk, inputs.ev.spdef, inputs.ev.spd];
+            ivEsts = estimateIVs(inputs.level, baseStats, evs, inputs.nature, stats);
+            $("div#iv-ests-container input").each(function(index, element) {
+                if (ivEsts == undefined || ivEsts[index] == undefined) {
+                    $(element).val("");
+                } else {
+                    $(element).val(ivEsts[index].join(", "));
+                }
+            });
+        }
     }
 }
 
