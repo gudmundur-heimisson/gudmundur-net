@@ -6,7 +6,8 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui/jquery-ui.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui/jquery-ui.structure.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery-ui/jquery-ui.theme.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+        <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"> -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script>window.jQuery || document.write("<script src=\"{{ url_for('static', filename='js/jquery/jquery-2.1.4.min.js') }}\"><\/script>")</script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -17,25 +18,31 @@
     <body>
         <div id="container">
             <div id="menu-wrapper">
-                <nav id="main-menu">
-                    <ul>
+                <nav id="main-menu" class="main-menu">
+                    <ul class="menu">
                         <li class="menu-item"><a href="/")>Home</a></li>
                         <li class="menu-item"><a href="resume">Resume</a></li>
-                        <li class="menu-item"><a href="kde">KDE</a>
+                        <li class="menu-item"><a href="kde">KDE</a></li>
                   <!--       <li class="menu-item"><a href="base-stats-browser">Pokémon Stats</a></li> -->
-                        <li class="menu-item"><a href="iv-calc">Pokémon IV Calculator</a></li>
+                        <li class="menu-item">
+                            <div class="long-label">
+                                <a href="iv-calc">IV Calculator</a>
+                            </div>
+                            <div class="short-label">
+                                <a href="iv-calc">IV Calc</a>
+                            </div>
+                        </li>
                     </ul>
                 </nav>
             </div>
-            <div id="content-wrapper">
-                <div id="content">
-                    {% block content %}{% endblock %}
-                </div>
+            <div id="content">
+                {% block content %}{% endblock %}
             </div>
         </div>
         <footer>
             {% block footer %}
-            &copy; Copyright 2014-2015 by Gudmundur Heimisson. Created with <a href="http://flask.pocoo.org">Flask</a>.
+            <p>&copy; Copyright 2014-2015 by Gudmundur Heimisson.</p>
+            <p>Created with <a href="http://flask.pocoo.org">Flask</a>.</p>
             {% endblock %}
         </footer>
     </body>

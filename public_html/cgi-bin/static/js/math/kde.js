@@ -2,7 +2,7 @@
 
 function KDEplot(KDEcanvas) {
     this.showPDF = true;
-    this.showSamples = false;
+    this.showSamples = true;
     this.showKDE = true;
     this.c1 = KDEcanvas;
     this.ax1 = new Axis(this.c1, -0.1, 3, -0.1, 1.5);
@@ -44,7 +44,7 @@ KDEplot.prototype.render = function() {
     
     this.ax1.showAxis();
     if (this.showSamples) {
-        this.ax1.plotPoints(this.samples, NumJS.linspace(0,0, this.n), "red");
+        this.ax1.plotDiscs(this.samples, NumJS.linspace(0,0, this.n), 2, "red");
     }
     if (this.showKDE) {
         var kde_t = this.KDE.density(this.t);
@@ -56,26 +56,37 @@ KDEplot.prototype.render = function() {
     }
 };
 
+function changeH(h) {
+        $("input#h-value").val(h);
+        KDEplot.h = h;
+        KDEplot.render();
+        renderKernel();
+}
+
+function changeSamples(n) {
+    $("input#n-value").val(n);
+    KDEplot.n = n;
+    KDEplot.recomputeSamples();
+    KDEplot.render();
+}
+
 $(function() {
     $(window).unload(function () {
         $('select option').remove();
     });
     $("input#pdf-button")
-    .button()
     .click( function(event) {
         event.preventDefault();
         KDEplot.showPDF = !KDEplot.showPDF;
         KDEplot.render();
     });
     $("input#kde-button")
-    .button()
     .click( function(event ) {
         event.preventDefault();
         KDEplot.showKDE = !KDEplot.showKDE;
         KDEplot.render();
     });
     $("input#samples-button")
-    .button()
     .click( function(event) {
         event.preventDefault();
         KDEplot.showSamples = !KDEplot.showSamples;
@@ -87,7 +98,6 @@ $(function() {
         }
     });
     $("input#normal-h")
-    .button()
     .click( function(event) {
         event.preventDefault();
         KDEplot.h = KDEplot.KDE.normal_h;
@@ -95,68 +105,33 @@ $(function() {
         $("input#h-value").val(KDEplot.h);
         KDEplot.render();
         renderKernel();
-    } );
-    $("div#h-range")
-    .slider({
-        range: "min",
-        min: 0.001,
-        max: 2,
-        step: 0.001,
-        value: 0.05,
-        slide: function(event, ui) {
-            var h = ui.value;
-            $("input#h-value").val(h);
-            KDEplot.h = h;
+    });
+    $("select#K-func").change(function(event) {
+            var element = $(event.target);
+            KDEplot.K = element.val();
             KDEplot.render();
             renderKernel();
-        }
-    });
-    $('div#h-range').slider('value', KDEplot.h);
-    $("input#h-value").val( $("div#h-range").slider("value") );
-    $("div#n-range")
-    .slider({
-        range: "min",
-        min: 5,
-        max: 1000,
-        step: 10,
-        value: 100,
-        slide: function(event, ui) {
-            var n = ui.value;
-            $("input#n-value").val(n);
-            KDEplot.n = n;
+        });
+    $("select#PDF-select").change( function(event) {
+        var element = $(event.target);
+        if (element.val() == "uniform") {
+            KDEplot.masterSamples = Stats.rv_uniform(KDEplot.a, KDEplot.b, KDEplot.nSamples);
+            KDEplot.samplePDF = function(x) {return Stats.pdf_uniform(x, KDEplot.a, KDEplot.b);};
             KDEplot.recomputeSamples();
-            KDEplot.render();
         }
-    });
-    $("input#n-value").val( $("div#n-range").slider("value") );
-    $("select#K-func").selectmenu( {
-        change: function( event, data ) {
-            KDEplot.K = data.item.value;
-            KDEplot.render();
-            renderKernel();
+        else if (element.val() == "normal") {
+            var mu = 1.5;
+            var sigma = 1/3;
+            KDEplot.masterSamples = Stats.rv_normal(mu, sigma, KDEplot.nSamples);
+            KDEplot.samplePDF = function(x) {return Stats.pdf_normal(x, mu, sigma);};
         }
-    });
-    $("select#PDF-select").selectmenu( {
-        change: function( event, data ) {
-            if (data.item.value == "uniform") {
-                KDEplot.masterSamples = Stats.rv_uniform(KDEplot.a, KDEplot.b, KDEplot.nSamples);
-                KDEplot.samplePDF = function(x) {return Stats.pdf_uniform(x, KDEplot.a, KDEplot.b);};
-                KDEplot.recomputeSamples();
-            }
-            else if (data.item.value == "normal") {
-                var mu = 1.5;
-                var sigma = 1/3;
-                KDEplot.masterSamples = Stats.rv_normal(mu, sigma, KDEplot.nSamples);
-                KDEplot.samplePDF = function(x) {return Stats.pdf_normal(x, mu, sigma);};
-            }
-            else if (data.item.value == "exponential") {
-                var lambda = 2/3;
-                KDEplot.masterSamples = Stats.rv_exponential(lambda, KDEplot.nSamples);
-                KDEplot.samplePDF = function(x) {return Stats.pdf_exponential(x, lambda);};
-            }
-            KDEplot.recomputeSamples();
-            KDEplot.render();
+        else if (element.val() == "exponential") {
+            var lambda = 2/3;
+            KDEplot.masterSamples = Stats.rv_exponential(lambda, KDEplot.nSamples);
+            KDEplot.samplePDF = function(x) {return Stats.pdf_exponential(x, lambda);};
         }
+        KDEplot.recomputeSamples();
+        KDEplot.render();
     });
 });
 

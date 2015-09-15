@@ -1,58 +1,64 @@
+/* Styles for all inputs */
 div#iv-calc {
-    overflow: auto;
-}
-
-div#iv-calc input {
-    width: 75px;
-    clear: right;
-    overflow:auto;
-}
-
-div#iv-calc label {
-    float: right;
-    margin-right: 5px;
-    overflow:auto;
 }
 
 div#iv-calc .iv-calc-label {
     float: left;
-    overflow:auto;
+    overflow: auto;
+    width: auto;
 }
 
+div#iv-calc .long-label {
+    visibility: hidden;
+}
+
+div#iv-calc label {
+    float: right;
+    overflow: auto;
+    width: 100%;
+}
+
+div#iv-calc .iv-calc-input {
+    width: auto;
+}
+
+div#iv-calc input {
+    width: 100%;
+}
+
+
+/* Styles for misc. inputs */
 div#misc-container .iv-calc-label {
-    width: 70px;
+}
+
+div#misc-container .iv-calc-input {
 }
 
 div#misc-container div#name-input {
-    float:left;
-    overflow:auto;
+
 }
 
+div#misc-container select#name {
+}
+
+/* Styles for stats input */
 div#stats-container {
-    float:left;
-    overflow: auto;
-    width:170px;
+
 }
 
 div#stats-container .iv-calc-label {
-    width: 85px;
 }
 
+/* Styles for EV input */
 div#evs-container {
-    float:left;
-    overflow:auto;
 }
 
 div#evs-container .iv-calc-label {
-    width: 110px;
-    /*visibility: hidden;*/
 }
 
+/* Styles for IV output */
 div#iv-ests-container .iv-calc-label {
-    width: 105px;
 }
 
 div#iv-ests-container {
-    float:left;
-    overflow:auto;
 }

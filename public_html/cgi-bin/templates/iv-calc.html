@@ -8,7 +8,7 @@
 <h1>Pokémon Individual Value Calculator</h1>
 <div id="iv-calc">
     <div id="misc-container">
-        <h2>Pokémon Species</h2>
+        <h2>Species</h2>
         <div id="pokedex-container" hidden="true">
             <label for="pokedex">Pokédex #:</label>
             <input id="pokedex" type="number" class="iv-calc-input">
@@ -45,13 +45,14 @@
             </div>
         </div>
     </div>
-    {% with tags, labels = (["hp", "atk", "def", "spatk", "spdef", "spd"], ["HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed"]) %}
+    {% with tags, labels, short_labels = (["hp", "atk", "def", "spatk", "spdef", "spd"], ["HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed"], ["HP", "Atk", "Def", "SpAtk", "SpDef", "Spd"]) %}
     <div id="stats-container">
         <h2>Stats</h2>
         {% for i in range(6) %}
             <div id="{{ tags[i] }}-stats-container">
                 <div id="{{ tags[i] }}-stat-label-container" class="iv-calc-label">
-                    <label for="{{ tags[i] }}-stat">{{ labels[i] }}:</label>
+                    <label class="long-label" for="{{ tags[i] }}-stat">{{ labels[i] }}:</label>
+                    <label class="short-label" for="{{ tags[i] }}-stat">{{ short_labels[i] }}:</label>
                 </div>
                 <div id="{{ tags[i] }}-stat-input-container" class="iv-calc-input">
                     <input id="{{ tags[i] }}-stat" type="number" min="1">
@@ -63,8 +64,9 @@
         <h2>EVs</h2>
         {% for i in range(6) %}
             <div id="{{ tags[i] }}-evs-container">
-                <div id="{{ tags[i] }}-ev-label-container" class="iv-calc-label" hidden="true">
-                    <label for="{{ tags[i] }}-ev">{{ labels[i] }} EV:</label>
+                <div id="{{ tags[i] }}-ev-label-container" class="iv-calc-label">
+                    <label class="long-label" for="{{ tags[i] }}-ev">{{ labels[i] }}:</label>
+                    <label class="short-label" for="{{ tags[i] }}-ev">{{ short_labels[i] }}:</label>
                 </div>
                 <div id="{{ tags[i] }}-ev" class="iv-calc-input">
                     <input id="{{ tags[i] }}-ev" type="number" min="0" value="0">
@@ -77,7 +79,8 @@
         {% for i in range(6) %}
             <div id="{{ tags[i] }}-iv-est-container">
                 <div id="{{ tags[i] }}-iv-calc-label" class="iv-calc-label">
-                    <label for="{{ tags[i] }}-iv-est" hidden="true">{{ labels[i] }} IV:</label>
+                    <label class="long-label" for="{{ tags[i] }}-iv-est">{{ labels[i] }}:</label>
+                    <label class="short-label" for="{{ tags[i] }}-iv-est">{{ short_labels[i] }}:</label>
                 </div>
                 <div id="{{ tags[i] }}-iv-calc-input" class="iv-calc-input">
                     <input id="{{ tags[i] }}-iv-est" type="text" readonly>

@@ -1,21 +1,17 @@
+html {
+    font-size: 100%;
+}
+
 body {
     background: none repeat scroll 0 0 #0072C6;
-    max-width: 780px;
-    margin: 20px auto;
-    padding: 0 20px;
-    font-size: 17px;
+    max-width: auto;
+    margin:  auto auto;
+    padding: auto auto;
     font-family: 'Georgia', sans-serif;
 }
 
-nav ul, nav ol {
-    margin: 10px 0px 10px 0px;
-    padding-left: 15px;
-    float: left;
-    list-style: none outside none;
-}
-
 footer {
-    margin: 20px auto;
+    margin: auto auto;
 }
 
 footer a {
@@ -23,11 +19,12 @@ footer a {
     text-decoration: none;
 }
 
+/* Menu styles */
 #menu-wrapper {
-    height: 2.3em;
     background-color: #F0F0F0;
-    border-radius: 5px 5px 0px 0px;
-    position: relative;
+    border-radius: auto auto auto auto;
+    /*position: relative;*/
+    overflow: auto;
 }
 
 nav#main-menu li {
@@ -35,38 +32,48 @@ nav#main-menu li {
 }
 
 nav#main-menu li a {
-    border: 1px solid transparent;
+    border: auto solid transparent;
     display: block;
     text-decoration: none;
     color: #000;
-    padding: 0px 5px 0 5px;
+    padding: auto auto 0 auto;
 }
 
 nav#main-menu li a:hover {
-    border: 1px solid rgba(0,0,0, 0.5);
+    border: solid rgba(0,0,0, 0.5);
 }
 
 nav#main-menu ul {
 }
 
+nav ul, nav ol {
+    margin: auto;
+    padding-left: auto;
+    float: left;
+    list-style: none outside none;
+}
+
+/* Content styles */
 #container {
 
 }
 
 #content-wrapper {
     background-color: #fff;
-    border-radius: 0px 0px 5px 5px;
+    border-radius: auto;
     position: relative;
-    padding: 20px 20px 20px 20px;
+    padding: auto;
+    overflow: auto;
 }
 
 #content {
     justify-content: left;
+    overflow: auto;
 }
 
 #content p {
-    margin-bottom: 15px;
-    margin-top: 0;
+    margin-bottom: auto;
+    margin-top: auto;
 }
 
 div#resume-pdf-notice {
@@ -74,48 +81,46 @@ div#resume-pdf-notice {
 }
 
 div.resume-block {
-    margin-bottom: 30px;
+    margin-bottom: auto;
 }
 
 div.resume-block #resume-contact p {
-    margin-top: 0px;
-    margin-bottom: 4px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 div.resume-block #tech-skills p {
-    margin-top: 0px;
-    margin-bottom: 4px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 h1 {
-    margin-top: 10px;
-    font-size: 25px;
-    margin-bottom: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 1.5rem;
 }
 
 h2 {
-    font-size: 20px;
-    margin-bottom: 5px;
-    margin-top: 10px;
+    margin-bottom: auto;
+    margin-top: auto;
 }
 
 h3 {
-    font-size: 18px;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 div.resume-block div.resume-block-content {
-    margin-left: 20px;
+    margin-left: auto;
 }
 
 div.resume-block div.resume-block-content div.resume-subitem {
-    margin-left: 20px;
+    margin-left: auto;
 }
 
 div.resume-block div.resume-block-content div.resume-subitem p {
-    margin-top: 0px;
-    margin-bottom: 0px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 div.resume-block div.resume-block-content p.employer-description {
@@ -131,7 +136,7 @@ div.resume-block div.resume-block-content p.job-description {
 }
 
 div#education ul {
-    margin-top: 5px;
+    margin-top: auto;
 }
 
 canvas#KDE-canvas {
@@ -143,42 +148,41 @@ canvas#K-canvas {
 }
 
 div#K-container {
-    margin-bottom: 10px;
+    margin-bottom: auto;
 }
 
 div#PDF-container {
-    margin-bottom: 10px;
+    margin-bottom: auto;
 }
 
 div#h-container {
-    margin-bottom: 10px;
+    margin-bottom: auto;
 }
 
 div#n-container {
-    margin-bottom: 10px;
+    margin-bottom: auto;
 }
 
 input#h-value {
-    width: 50px;
+    width: auto;
 }
 
 input#n-value {
-    width: 50px;
+    width: auto;
 }
 
 select#K-func {
-    width: 180px;
+    width: auto;
 }
 
 select#PDF-select {
-    width: 180px;
+    width: auto;
 }
 
 div#K-container label{
-    margin-bottom: 15px;
-    font-size: 20px;
+    margin-bottom: auto;
 }
 
 div#K-container {
-    margin-bottom: 15px;
+    margin-bottom: auto;
 }
