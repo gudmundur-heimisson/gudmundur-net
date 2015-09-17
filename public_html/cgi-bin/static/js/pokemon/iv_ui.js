@@ -15,7 +15,7 @@ function populateNamesDropdown( search, names ) {
     var select = $("select#name");
     select.html("");
     for (var i=0; i<subNames.length; ++i) {
-        select.append("<option value=\"" + subNames[i] + "\">" + subNames[i] + "</option>")
+        select.append("<option value=\"" + subNames[i] + "\">" + subNames[i].replace(/ (Forme|Mode|Size|Cloak)/, "") + "</option>")
     }
     inputs["name"] = subNames[0];
 }
