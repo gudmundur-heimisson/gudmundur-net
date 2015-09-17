@@ -30,11 +30,20 @@ h2 {
 }
 
 .iv-calc-input {
-    width: 5rem;
+    width: 3rem;
     margin-right: 0.3rem;
 }
 
 .iv-calc-input input {
+    width: 100%;
+}
+
+.iv-calc-output {
+    width: 5rem;
+    margin-right: 0.3rem;
+}
+
+.iv-calc-output input {
     width: 100%;
 }
 
@@ -68,6 +77,7 @@ h2 {
 }
 
 #misc-container #name-input {
+    width: 4rem;
     max-width: 33.33%;
     margin-right: 0.5rem;
 }
@@ -104,7 +114,7 @@ h2 {
 #iv-ests-container {
 }
 
-@media screen and (min-width: 340px) {
+@media screen and (min-width: 300px) {
     html {
         /*font-size: 120%;*/
     }
