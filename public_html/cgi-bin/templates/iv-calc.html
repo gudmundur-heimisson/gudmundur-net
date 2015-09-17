@@ -2,18 +2,18 @@
 {% block title %} Pokémon Individual Value Calculator{% endblock %}
 {% block head %}
     {{ super() }}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pokemon-iv-calculator.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/iv-calc.css') }}">
 {% endblock %}
 {% block content %}
-<h1>Pokémon Individual Value Calculator</h1>
 <div id="iv-calc">
+    <h1>Pokémon IV Calculator</h1>
     <div id="misc-container">
-        <h2>Species</h2>
+        <div class="header"><h2>Species</h2></div>
         <div id="pokedex-container" hidden="true">
             <label for="pokedex">Pokédex #:</label>
             <input id="pokedex" type="number" class="iv-calc-input">
         </div>
-        <div id="name-container">
+        <div id="name-container" class="input-container">
             <div id="name-label" class="iv-calc-label">
                 <label for="name-search">Name:</label>
             </div>
@@ -24,7 +24,7 @@
                 <select name="name" id="name"></select>
             </div>
         </div>
-        <div id="level-container">
+        <div id="level-container" class="input-container">
             <div id="level-label" class="iv-calc-label">
                 <label for="level">Level:</label>
             </div>
@@ -32,7 +32,7 @@
                 <input id="level" type="number" min="1" max="100">
             </div>
         </div>
-        <div id="pokemon-nature-container">
+        <div id="pokemon-nature-container" class="input-container">
             <div id="nature-label" class="iv-calc-label">
                 <label for="nature">Nature:</label>
             </div>
@@ -46,10 +46,10 @@
         </div>
     </div>
     {% with tags, labels, short_labels = (["hp", "atk", "def", "spatk", "spdef", "spd"], ["HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed"], ["HP", "Atk", "Def", "SpAtk", "SpDef", "Spd"]) %}
-    <div id="stats-container">
-        <h2>Stats</h2>
+    <div id="stats-container" class="inputs-group">
+        <div class="header"><h2>Stats</h2></div>
         {% for i in range(6) %}
-            <div id="{{ tags[i] }}-stats-container">
+            <div id="{{ tags[i] }}-stats-container"  class="input-container">
                 <div id="{{ tags[i] }}-stat-label-container" class="iv-calc-label">
                     <label class="long-label" for="{{ tags[i] }}-stat">{{ labels[i] }}:</label>
                     <label class="short-label" for="{{ tags[i] }}-stat">{{ short_labels[i] }}:</label>
@@ -60,10 +60,10 @@
             </div>
         {% endfor %}
     </div>
-    <div id="evs-container">
-        <h2>EVs</h2>
+    <div id="evs-container" class="inputs-group">
+        <div class="header"><h2>EVs</h2></div>
         {% for i in range(6) %}
-            <div id="{{ tags[i] }}-evs-container">
+            <div id="{{ tags[i] }}-evs-container" class="input-container">
                 <div id="{{ tags[i] }}-ev-label-container" class="iv-calc-label">
                     <label class="long-label" for="{{ tags[i] }}-ev">{{ labels[i] }}:</label>
                     <label class="short-label" for="{{ tags[i] }}-ev">{{ short_labels[i] }}:</label>
@@ -74,10 +74,10 @@
             </div>
         {% endfor %}
     </div>
-    <div id="iv-ests-container">
-        <h2>IVs</h2>
+    <div id="iv-ests-container" class="inputs-group">
+        <div class="header"><h2>IVs</h2></div>
         {% for i in range(6) %}
-            <div id="{{ tags[i] }}-iv-est-container">
+            <div id="{{ tags[i] }}-iv-est-container" class="input-container">
                 <div id="{{ tags[i] }}-iv-calc-label" class="iv-calc-label">
                     <label class="long-label" for="{{ tags[i] }}-iv-est">{{ labels[i] }}:</label>
                     <label class="short-label" for="{{ tags[i] }}-iv-est">{{ short_labels[i] }}:</label>

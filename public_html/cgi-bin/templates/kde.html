@@ -6,17 +6,22 @@
 {% block content %}
 <h1>Kernel Density Estimators</h1>
     <div id="display-buttons">
-        <input type="button" value="Toggle PDF" id="pdf-button">
+        <input type="button" value="Toggle PDF" id="pdf-button" class="button">
         <!-- <input type="button" value="Toggle KDE" id="kde-button"> -->
-        <input type="button" value="Hide samples" id="samples-button">
+        <input type="button" value="Hide samples" id="samples-button" class="button">
     </div>
 <canvas id="KDE-canvas" width="500px" height="300px">Your browser does not support the HTML5 canvas tag.</canvas>
 <div id="kde-inputs-container">
     <div id="h-container">
         <label for="h-value">Smoothing parameter:</label>
         <input id="h-value" type="number" readonly>
-        <input id="h-range" type="range" min="0.001" max="2.0" step="0.001" value="0.10" oninput="changeH(this.value)" onchange="changeH(this.value)"></div>
+        <input id="h-range" type="range" min="0.001" max="2.0" step="0.001" value="0.10"  class="range" oninput="changeH(this.value);"></div>
         <!-- <input type="button" value="Auto-Smooth" id="normal-h"> -->
+    </div>
+    <div id="n-container">
+        <label for="n-value">Number of samples:</label>
+        <input id="n-value" type="number" readonly>
+        <input id="n-range" type="range" min="2" max="1000" step="1" value="100" oninput="changeSamples(this.value);" class="range">
     </div>
     <div id="PDF-container">
         <label for="PDF-select">Sample PDF:</label>
@@ -28,17 +33,14 @@
     </div>
     <div id="K-container">
         <canvas id="K-canvas">Your browser does not support the HTML5 canvas tag.</canvas>
+        <div id="K-select">
         <label for="K-func">Kernel:</label>
-        <select name="K-func" id="K-func">
-            <option value="normal" selected="selected">Normal</option>
-            <option value="uniform">Rectangular</option>
-            <option value="epanechnikov">Epanechnikov</option>
-        </select>
-    </div>
-    <div id="n-container">
-        <label for="n-value">Number of samples:</label>
-        <input id="n-value" type="number" readonly>
-        <input id="n-range" type="range" min="2" max="1000" step="1" value="100" oninput="changeSamples(this.value)" onchange="changeSamples(this.value)">
+            <select name="K-func" id="K-func">
+                <option value="normal" selected="selected">Normal</option>
+                <option value="uniform">Rectangular</option>
+                <option value="epanechnikov">Epanechnikov</option>
+            </select>
+        </div>
     </div>
 </div>
 {% endblock %}

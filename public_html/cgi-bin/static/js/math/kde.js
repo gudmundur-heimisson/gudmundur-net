@@ -72,8 +72,12 @@ function changeSamples(n) {
 
 $(function() {
     $(window).unload(function () {
-        $('select option').remove();
+        $("select option").remove();
     });
+    // $("input#h-range").change( function(event) {
+    //     event.preventDefault();
+    //     changeH(event.target.value);
+    // });
     $("input#pdf-button")
     .click( function(event) {
         event.preventDefault();
@@ -148,3 +152,5 @@ var KDEplot = new KDEplot(document.getElementById('KDE-canvas'));
 KDEplot.render();
 var kplot = new Axis(document.getElementById('K-canvas'), -1.5, 1.5, 0.0, 1.0);
 renderKernel();
+changeH(KDEplot.h);
+changeSamples(KDEplot.n);
