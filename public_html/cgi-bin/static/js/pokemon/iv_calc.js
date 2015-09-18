@@ -50,8 +50,8 @@ function estimateIVs(level, baseStats, evs, nature, stats) {
                 var lower = est(0, 0);
                 var upper = est(0.99, 0.9);
             }
-            var l = Math.ceil(lower);
-            var u = Math.floor(upper);
+            var l = Math.max(Math.ceil(lower), 0);
+            var u = Math.min(Math.floor(upper), 31);
             ivs[i] = new Array();
             if (!(l>=0 && u<=31)) {
                 ivs[i].push(NaN);

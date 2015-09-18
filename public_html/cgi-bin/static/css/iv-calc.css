@@ -108,15 +108,15 @@ h2 {
 
 /* Styles for IV output */
 #iv-ests-container .iv-calc-label {
-/*    display: none;*/
+    display: none;
 }
 
 #iv-ests-container {
 }
 
-@media screen and (min-width: 300px) {
+/*@media screen and (min-width: 300px) {
     html {
-        /*font-size: 120%;*/
+        font-size: 120%;
     }
 
     .inputs-group {
@@ -133,3 +133,4 @@ h2 {
 
 @media screen and (min-width: 800px) {
 }
+/*

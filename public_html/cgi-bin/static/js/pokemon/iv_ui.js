@@ -32,7 +32,7 @@ $.ajax({
             names.push(pokedata[i].name);
         }
         names.sort();
-        var search = $("input#name-search").value;
+        var search = $("input#name-search").val();
         populateNamesDropdown(search, names);
         changeOutput();
     }
@@ -59,7 +59,16 @@ var changeOutput = function() {
                 if (ivEsts == undefined || ivEsts[index] == undefined) {
                     $(element).val("");
                 } else {
-                    $(element).val(ivEsts[index].join(", "));
+                    var ivEst = ivEsts[index];
+                    var lower = ivEst[0];
+                    var upper = ivEst[ivEst.length-1];
+                    if (upper == lower) {
+                        $(element).val(upper);
+                    } else if (isNaN(lower) && isNaN(upper)) {
+                        $(element).val("");
+                    } else {
+                        $(element).val(lower + " - " + upper);
+                    }
                 }
             });
         }
