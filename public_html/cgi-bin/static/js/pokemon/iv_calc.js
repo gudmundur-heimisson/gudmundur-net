@@ -9,8 +9,8 @@ natureMatrices = {};
 for (var i=0; i<5; ++i) {
     for (var j=0; j<5; ++j) {
         var m = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0];
-        m[i+1] = 0.1 + m[i];
-        m[j+1] = -0.1 + m[j];
+        m[i+1] = 0.1 + m[i+1];
+        m[j+1] = -0.1 + m[j+1];
         natureMatrices[natures[i][j]] = m;
     }
 }
