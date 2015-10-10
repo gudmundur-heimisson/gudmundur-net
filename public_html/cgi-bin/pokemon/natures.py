@@ -1,4 +1,6 @@
-class Nature(object):
+#!/usr/local/bin/python3
+
+class Nature():
     def __init__(self, name, helpfulStat, hinderingStat):
         self.name = name
         self.helpful = helpfulStat

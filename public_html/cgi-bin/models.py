@@ -46,14 +46,12 @@ def reload_tables():
 
 def load_data():
     db.connect()
-    with open('./data/forms.csv', 'rb') as infile:
+    with open('./data/forms.csv', 'r') as infile:
         reader = csv.reader(infile, delimiter=',')
         header = next(reader)
         lastName = None
         for row in reader:
             dex, name, form, *stats = row
-            if 'Nidoran' in name:
-                print(name)
             form = None if form == '' else form
             hp, atk, df, spatk, spdef, spd = stats
             if lastName != name:
@@ -69,3 +67,21 @@ def load_data():
                              special_defense = spdef,
                              speed = spd)
 
+def get_base_stats():
+    query = BaseStats.select(BaseStats, Pokemon, Form).join(Pokemon).switch(BaseStats).join(Form, join_type=pw.JOIN.LEFT_OUTER)
+    return [{"name": q.pokemon.name, 
+            "form": q.form.name, 
+            "health_points": q.health_points, 
+            "attack": q.attack, 
+            "defense": q.defense, 
+            "special_attack": q.special_attack, 
+            "special_defense": q.special_defense, 
+            "speed": q.speed}
+            for q in query]
+
+
+if __name__ == '__main__':
+    from pprint import pprint
+    db.connect()
+    pprint(get_base_stats())
+    db.close()

@@ -1,61 +1,21 @@
 #!/usr/local/bin/python3
 import sys
-
-from peewee import *
-
-from flask import Flask, render_template
-from flask_peewee.db import Database
-from flask_peewee.rest import RestAPI, RestResource
-
-from pokemon import natures
-
-DATABASE = {
-    'name': 'gudmvlpz_pokemon_gen6',
-    'engine': 'peewee.MySQLDatabase',
-    'user': 'gudmvlpz_pokedb',
-    'passwd': 'v4545kr1m5l1'
-}
+import models
+from flask import Flask, render_template, g, jsonify
+from pokemon.natures import natures
 
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-db = Database(app)
+@app.before_request
+def before_request():
+    g.db = models.db.connect()
 
-class BaseStats(db.Model):
-    attack = IntegerField()
-    defense = IntegerField()
-    name = CharField(max_length=128)
-    health_points = IntegerField()
-    pokedex_number = PrimaryKeyField()
-    special_attack = IntegerField()
-    special_defense = IntegerField()
-    speed = IntegerField()
-    total = IntegerField()
-
-    class Meta:
-        db_table = 'individual_values'
-
-class Names(db.Model):
-    name = CharField(max_length=128)
-    pokedex_number = PrimaryKeyField()
-
-    class Meta:
-        db_table = 'names'
-
-class PokeResource(RestResource):
-    pass
-
-class BaseStatsResource(PokeResource):
-    paginate_by = 1000
-
-class NamesResource(PokeResource):
-    paginate_by = 1000
-
-
-api = RestAPI(app)
-api.register(Names, NamesResource)
-api.register(BaseStats, BaseStatsResource)
-api.setup()
+@app.teardown_request
+def teardown_request(exception):
+    db = getattr(g, 'db', None)
+    if db is not None:
+        db.close()
 
 @app.route("/")
 def index():
@@ -79,11 +39,16 @@ def base_stats_browser():
 
 @app.route("/iv-calc")
 def iv_calc():
-    return render_template('iv-calc.html', natures=sorted(natures, key=lambda x: x.name))
+    return render_template('iv-calc.html', 
+                           natures=sorted(natures, key=lambda x: x.name))
 
 @app.route("/test")
 def test():
     return sys.executable
+
+@app.route("/api/basestats", methods=['GET'])
+def get_base_stats():
+    return jsonify({"objects":models.get_base_stats()})
 
 if __name__ == "__main__":
     app.debug = True
