@@ -2,10 +2,8 @@
 import sys
 import models
 from flask import Flask, render_template, g, jsonify
-from pokemon.natures import natures
 
 app = Flask(__name__)
-app.config.from_object(__name__)
 
 @app.before_request
 def before_request():
@@ -39,8 +37,7 @@ def base_stats_browser():
 
 @app.route("/iv-calc")
 def iv_calc():
-    return render_template('iv-calc.html', 
-                           natures=sorted(natures, key=lambda x: x.name))
+    return render_template('iv-calc.html')
 
 @app.route("/test")
 def test():
@@ -48,7 +45,7 @@ def test():
 
 @app.route("/api/basestats", methods=['GET'])
 def get_base_stats():
-    return jsonify({"objects":models.get_base_stats()})
+    return jsonify({"objects": models.get_base_stats()})
 
 if __name__ == "__main__":
     app.debug = True

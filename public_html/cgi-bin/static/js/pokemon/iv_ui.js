@@ -1,6 +1,15 @@
-var inputs = {"stat": {},
-              "ev": {}};
-var ivEsts = new Array(6);
+function populateNatures() {
+    var names = [];
+    for (n in NaturesMap) {
+        names.push(n);
+    }
+    names.sort();
+    var select = $("select#nature");
+    select.html("");
+    for (var i=0; i<names.length; ++i) {
+        select.append("<option>" + names[i] + "</option>");
+    }
+}
 
 function populateNamesDropdown( search, names ) {
     var subNames;
@@ -8,39 +17,23 @@ function populateNamesDropdown( search, names ) {
         subNames = names;
     } else {
         var re = new RegExp("^" + search + ".*", "i");
-        subNames = $.grep(names, function(element) {
-            return element.match(re);
+        subNames = $.grep(names, function(element, index) {
+            if (index > 0 && names[index-1] != element) {
+               return element.match(re);
+            }
         });
     }
     var select = $("select#name");
     select.html("");
     for (var i=0; i<subNames.length; ++i) {
-        select.append("<option value=\"" + subNames[i] + "\">" + subNames[i].replace(/ (Forme|Mode|Size|Cloak)/, "") + "</option>")
+        select.append("<option>" + subNames[i] + "</option>");
     }
     inputs["name"] = subNames[0];
 }
 
-var pokedata;
-var names = [];
-
-$.ajax({
-    dataType: "json",
-    url: "api/basestats",
-    success: function( data ) {
-        pokedata = data.objects;
-        for (var i=0; i<pokedata.length; ++i) {
-            names.push(pokedata[i].name);
-        }
-        names.sort();
-        var search = $("input#name-search").val();
-        populateNamesDropdown(search, names);
-        changeOutput();
-    }
-});
-
 var changeOutput = function() {
     if (pokedata != undefined) {
-        var pokemon = $.grep(pokedata, function(pokemon) {
+        var pokemon = $.grep(pokedata, function(pokemon, index) {
             if (pokemon.name == inputs.name) {
                 return true;
             }
@@ -54,7 +47,7 @@ var changeOutput = function() {
                          inputs.stat.spatk, inputs.stat.spdef, inputs.stat.spd];
             var evs = [inputs.ev.hp, inputs.ev.atk, inputs.ev.def,
                        inputs.ev.spatk, inputs.ev.spdef, inputs.ev.spd];
-            ivEsts = estimateIVs(inputs.level, baseStats, evs, inputs.nature, stats);
+            var ivEsts = estimateIVs(inputs.level, baseStats, evs, inputs.nature, stats);
             $("div#iv-ests-container input").each(function(index, element) {
                 if (ivEsts == undefined || ivEsts[index] == undefined) {
                     $(element).val("");
@@ -103,6 +96,27 @@ var selectChange = function(event) {
     changeOutput();
 }
 
+populateNatures();
+
+var pokedata;
+var names = [];
+var pokemon = new Pokemon();
+
+$.ajax({
+    dataType: "json",
+    url: "api/basestats",
+    success: function( data ) {
+        pokedata = data.objects;
+        for (var i=0; i<pokedata.length; ++i) {
+            names.push(pokedata[i].name);
+        }
+        names.sort();
+        var search = $("input#name-search").val();
+        populateNamesDropdown(search, names);
+        changeOutput();
+    }
+});
+
 $("div#iv-calc input").each(function(index, element) {
     recordInput($(element));
 });
@@ -115,8 +129,7 @@ $(function() {
     $("div#iv-calc input").keyup(inputChange);
     $("div#iv-calc input").change(inputChange);
     $("div#iv-calc select").change(selectChange);
-    $("input#name-search")
-    .keyup(function(event) {
+    $("input#name-search").keyup(function(event) {
         event.preventDefault();
         var search = event.target.value;
         populateNamesDropdown(search, names);
