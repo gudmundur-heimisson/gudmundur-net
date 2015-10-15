@@ -14,7 +14,7 @@
                 <label for="name-search">Name:</label>
             </div>
             <div id="name-input" class="iv-calc-input">
-                <input id="name-search" type="text">
+                <input name="name-search" id="name-search" type="text">
             </div>
             <div id="name-select" class="iv-calc-select">
                 <select name="name" id="name"></select>
@@ -25,7 +25,7 @@
                 <label for="level">Level:</label>
             </div>
             <div id="level-input" class="iv-calc-input">
-                <input id="level" type="number" min="1" max="100">
+                <input id="level" name="level" type="number" min="1" max="100">
             </div>
         </div>
         <div id="nature-container" class="input-container">
@@ -37,11 +37,20 @@
                 </select>
             </div>
         </div>
+        <div id="characteristic-container" class="input-container">
+            <div id="characteristic-label" class="iv-calc-label">
+                <label for="characteristic">Character:</label>
+            </div>
+            <div id="characteristic-select" class="iv-calc-select">
+                <select name="characteristic" id="characteristic">
+                </select>
+            </div>
+        </div>
         <div id="form-container" class="input-container">
             <div id="form-label" class="iv-calc-label">
                 <label for="form">Form:</label>
             </div>
-            <div id="form-select" class="iv-calc-input">
+            <div id="form-select" class="iv-calc-select">
                 <select name="form" id="form">
                 </select>
             </div>
@@ -56,7 +65,7 @@
                     <label class="label" for="{{ tags[i] }}-stat">{{ labels[i] }}:</label>
                 </div>
                 <div id="{{ tags[i] }}-stat-input-container" class="iv-calc-input">
-                    <input id="stats-{{ i }}" type="number" min="1">
+                    <input id="{{ tags[i] }}-stat" name="stats-{{ i }}" type="number" min="1" class="stats-{{ i }}">
                 </div>
             </div>
         {% endfor %}
@@ -68,8 +77,8 @@
                 <div id="{{ tags[i] }}-ev-label-container" class="iv-calc-label">
                     <label class="label" for="{{ tags[i] }}-ev">{{ labels[i] }}:</label>
                 </div>
-                <div id="{{ tags[i] }}-ev" class="iv-calc-input">
-                    <input id="evs-{{ i }}" type="number" min="0" value="0">
+                <div id="{{ tags[i] }}-ev-input-container" class="iv-calc-input">
+                    <input id="{{ tags[i] }}-ev" name="evs-{{ i }}" type="number" min="0" value="0" class="evs-{{ i }}">
                 </div>
             </div>
         {% endfor %}
@@ -78,11 +87,11 @@
         <div class="header"><h2>IVs</h2></div>
         {% for i in range(6) %}
             <div id="{{ tags[i] }}-iv-est-container" class="input-container">
-                <div id="{{ tags[i] }}-iv-calc-label" class="iv-calc-label">
+                <div id="{{ tags[i] }}-iv-est-label" class="iv-calc-label">
                     <label class="label" for="{{ tags[i] }}-iv-est">{{ labels[i] }}:</label>
                 </div>
-                <div id="{{ tags[i] }}-iv-calc-input" class="iv-calc-output">
-                    <input id="ivEsts-{{ i }}" type="text" readonly>
+                <div id="{{ tags[i] }}-iv-est-container" class="iv-calc-output">
+                    <input id="{{ tags[i] }}-iv-est" name="ivests-{{ i }}" type="text" class="ivEsts-{{ i }}" readonly>
                 </div>
             </div>
         {% endfor %}
@@ -92,8 +101,10 @@
 {% endblock %}
 {% block footer %}
     <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_calc.js') }}"></script> -->
-    <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_estimator.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_estimator_model.js') }}"></script>
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_ui.js') }}"></script> -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_estimator_controller.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/test_iv_estimator.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_ui.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_estimator.js') }}"></script>
     {{ super() }}
 {% endblock %}

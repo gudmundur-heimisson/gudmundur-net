@@ -62,6 +62,7 @@ h2 {
 }
 
 #misc-container .iv-calc-label {
+    width: 5rem;
 }
 
 #misc-container .iv-calc-input {

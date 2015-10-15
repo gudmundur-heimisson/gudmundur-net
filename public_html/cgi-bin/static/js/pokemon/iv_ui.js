@@ -28,7 +28,6 @@ function populateNamesDropdown( search, names ) {
     for (var i=0; i<subNames.length; ++i) {
         select.append("<option>" + subNames[i] + "</option>");
     }
-    inputs["name"] = subNames[0];
 }
 
 var changeOutput = function() {
@@ -66,7 +65,7 @@ var changeOutput = function() {
             });
         }
     }
-}
+};
 
 var recordInput = function(element) {
     var id = element.attr("id");
@@ -80,21 +79,22 @@ var recordInput = function(element) {
             inputs[id] = Number(val);
         }
     }
-}
+};
 
 var recordSelect = function(element) {
     var id = element.attr("id");
     inputs[id] = $("option:selected", element).val();
-}
+};
 
 var inputChange = function(event) {
     recordInput($(event.target));
     changeOutput();
-}
+};
+
 var selectChange = function(event) {
     recordSelect($(event.target));
     changeOutput();
-}
+};
 
 populateNatures();
 
@@ -113,25 +113,5 @@ $.ajax({
         names.sort();
         var search = $("input#name-search").val();
         populateNamesDropdown(search, names);
-        changeOutput();
     }
-});
-
-$("div#iv-calc input").each(function(index, element) {
-    recordInput($(element));
-});
-
-$("div#iv-calc select").each(function(index, element) {
-    recordSelect($(element));
-});
-
-$(function() {
-    $("div#iv-calc input").keyup(inputChange);
-    $("div#iv-calc input").change(inputChange);
-    $("div#iv-calc select").change(selectChange);
-    $("input#name-search").keyup(function(event) {
-        event.preventDefault();
-        var search = event.target.value;
-        populateNamesDropdown(search, names);
-    });
 });
