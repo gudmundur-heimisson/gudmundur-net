@@ -1,4 +1,3 @@
-#!/usr/local/bin/python3
 import sys
 import models
 from flask import Flask, render_template, g, jsonify

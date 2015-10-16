@@ -1,4 +1,3 @@
-#!/usr/local/bin/python3
 import csv
 import peewee as pw
 
@@ -51,7 +50,8 @@ def load_data():
         header = next(reader)
         lastName = None
         for row in reader:
-            dex, name, form, *stats = row
+            dex, name, form = row[:3]
+            stats = row[3:]
             form = None if form == '' else form
             hp, atk, df, spatk, spdef, spd = stats
             if lastName != name:
