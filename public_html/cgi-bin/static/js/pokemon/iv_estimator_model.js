@@ -18,8 +18,8 @@ function estimateIV(level, base, s, ev, n, isHP) {
         var l = Math.max(Math.ceil(lower), 0);
         var u = Math.min(Math.floor(upper), 31);
         if (l<=u && l>=0 && l<=31 && u>=0 && u<=31) {
-            var min = 31;
-            var max = 0;
+            var min =  Infinity;
+            var max = -Infinity;
             for (var j=0; j<=u-l; ++j) {
                 var iv = l+j;
                 if (s == computeStat(iv, base, ev, level, n, isHP)) {
@@ -31,8 +31,10 @@ function estimateIV(level, base, s, ev, n, isHP) {
                     }
                 }
             }
-            ivEst.lower = min;
-            ivEst.upper = max;
+            if (!(min == Infinity || max == -Infinity)) {
+                ivEst.lower = min;
+                ivEst.upper = max;
+            }
         }
     }
     return ivEst;
@@ -68,14 +70,42 @@ var naturesMatrix = [["Hardy","Lonely","Adamant","Naughty","Brave"],
                ["Calm","Gentle","Careful","Quirky","Sassy"],
                ["Timid", "Hasty", "Jolly","Naive","Serious"]];
 
-NaturesMap = {};
+var NaturesMap = {};
 for (var i=0; i<5; ++i) {
     for (var j=0; j<5; ++j) {
         NaturesMap[naturesMatrix[i][j]] = new Nature(i+1, j+1);
     }
 }
 
-function Characteristic() {}
+function Characteristic(stat, values) {
+    this.stat = stat;
+    this.values = values;
+}
+
+var charsMatrix = [["Loves to eat", "Proud of its power", "Sturdy body",
+                    "Highly curious", "Strong willed", "Likes to run"],
+                   ["Takes plenty of siestas", "Likes to thrash about",
+                    "Capable of taking hits", "Mischievous", "Somewhat vain",
+                    "Alert to sounds"],
+                   ["Nods off a lot", "A little quick tempered", "Highly persistent",
+                    "Thoroughly cunning", "Strongly defiant", "Impetuous and silly"],
+                   ["Scatters things often", "Likes to fight", "Good endurance",
+                    "Often lost in thought", "Hates to lose", "Somewhat of a clown"],
+                   ["Likes to relax", "Quick tempered", "Good perseverance",
+                    "Very finicky", "Somewhat stubborn", "Quick to flee"]];
+
+var CharsMap = {};
+for (var row=0; row<5; ++row) {
+        var values = [];
+        for (var iv=0; iv<32; ++iv) {
+            if (iv % 5 == row) {
+                values.push(iv);
+            }
+        }
+    for (var col=0; col<6; ++col) {
+        CharsMap[charsMatrix[row][col]] = new Characteristic(col, values);
+    }
+}
 
 function Pokemon(baseStats, level, nature, characteristic, stats, evs) {
     this.baseStats = baseStats == undefined ? new Array(6) : baseStats;
@@ -116,6 +146,40 @@ IVEstimator.prototype.estimateAll = function() {
         }
     }
     if (this.pokemon.characteristic != undefined) {
-        //TODO
+        this.adjustForCharacteristic();
+    }
+};
+
+IVEstimator.prototype.adjustForCharacteristic = function() {
+    var character = this.pokemon.characteristic;
+    var est = this.ivEsts[character.stat];
+    if (!(est.upper == null || est.lower == null)) {
+        var min = est.upper;
+        var max = est.lower;
+        var l   = est.lower;
+        var u   = est.upper;
+        est.lower = null;
+        est.upper = null;
+        for (var i=0; i<character.values.length; ++i) {
+            var v = character.values[i];
+            if (v <= min && v >= l) {
+                min = v;
+                est.lower = v;
+            }
+            if (v >= max && v <= u) {
+                max = v;
+                est.upper = v;
+            }
+        }
+        if (!(est.upper == null || est.lower == null)) {
+            for (var i=0; i<this.ivEsts.length; ++i) {
+                est = this.ivEsts[i];
+                est.upper = est.upper > max ? max : est.upper;
+                if (est.lower > est.upper) {
+                    est.upper = null;
+                    est.lower = null;
+                }
+            }
+        }
     }
 };

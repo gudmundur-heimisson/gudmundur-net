@@ -30,6 +30,7 @@ function IVEstimatorController(rootElement, data) {
     this.populateNatures();
     this.populateNames();
     this.populateForms();
+    this.populateCharacteristics();
     // Attach listeners
     var obj = this;
     this.nameSearch.keyup(function(event) {
@@ -41,8 +42,8 @@ function IVEstimatorController(rootElement, data) {
         event.preventDefault();
         obj.populateForms();
     });
-    var changeTriggers = [this.name, this.nameSearch, this.level, this.nature, this.form,
-                          this.characteristic]
+    var changeTriggers = [this.name, this.nameSearch, this.level, this.nature,
+                          this.form, this.characteristic]
     changeTriggers = changeTriggers.concat(this.stats).concat(this.evs);
     var changeFun = function(event) {
         event.preventDefault();
@@ -125,6 +126,18 @@ IVEstimatorController.prototype.populateForms = function() {
     populateSelect(this.form, forms);
 };
 
+IVEstimatorController.prototype.populateCharacteristics = function() {
+    var chars = [];
+    for (c in CharsMap) {
+        chars.push({"text":c, "value":c});
+    }
+    chars.sort(function(a,b) {
+        if (a.text == b.text) return 0;
+        return a.text < b.text ? -1 : 1;
+    });
+    populateSelect(this.characteristic, chars);
+};
+
 IVEstimatorController.prototype.readBaseStats = function() {
     var id = this.form.val();
     var p = this.data[id-1];
@@ -172,7 +185,7 @@ IVEstimatorController.prototype.readLevel = function() {
 };
 
 IVEstimatorController.prototype.readCharacteristic = function() {
-    this.pokemon.characteristic = this.characteristic.val();
+    this.pokemon.characteristic = CharsMap[this.characteristic.val()];
 };
 
 IVEstimatorController.prototype.readAll = function() {
@@ -189,7 +202,9 @@ IVEstimatorController.prototype.writeIVEsts = function() {
         var est = this.ivEstimator.ivEsts[i];
         var element = this.ivEsts[i];
         if (est.lower == null || est.upper == null) {
-            element.val("Miaow");
+            element.val("");
+        } else if (est.lower == est.upper) {
+            element.val(est.upper);
         } else {
             element.val(est.lower + " - " + est.upper);
         }
