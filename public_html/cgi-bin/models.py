@@ -1,5 +1,6 @@
 import csv
 import peewee as pw
+import codecs
 
 db = pw.MySQLDatabase('gudmvlpz_pokemon',
                       user='gudmvlpz_pokedb', 
@@ -45,11 +46,12 @@ def reload_tables():
 
 def load_data():
     db.connect()
-    with open('./data/forms.csv', 'r') as infile:
-        reader = csv.reader(infile, delimiter=',')
-        header = next(reader)
+    with codecs.open('./data/forms.csv', 'r', 'utf8') as infile:
+        # reader = csv.reader(infile, delimiter=',')
+        header = next(infile)
         lastName = None
-        for row in reader:
+        for line in infile:
+            row = line.split(',')
             dex, name, form = row[:3]
             stats = row[3:]
             form = None if form == '' else form
@@ -80,7 +82,6 @@ def get_base_stats():
             "special_defense": q.special_defense, 
             "speed": q.speed}
             for q in query]
-
 
 if __name__ == '__main__':
     from pprint import pprint
