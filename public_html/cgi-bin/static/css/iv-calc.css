@@ -7,11 +7,16 @@ h2 {
     margin-bottom: 0.3rem;
 }
 
+.header-container {
+    display: flex;
+}
+
 .header {
+    margin: auto;
 }
 
 /* Styles for all inputs */
-#iv-calc {
+.iv-calc {
     display: flex;
     flex-flow: row wrap;
 }
@@ -21,22 +26,30 @@ h2 {
     margin-right: 0.3rem;
 }
 
-#iv-calc label {
+.iv-calc label {
     float: right;
 }
 
 .iv-calc-input {
-    width: 3rem;
-    margin-right: 0.3rem;
+    width: 4rem;
+    /*margin-right: 1rem;*/
 }
 
 .iv-calc-input input {
     width: 100%;
 }
 
+.stats-grid-input {
+    width: 4rem;
+}
+
+.stats-grid-input input {
+    width: 75%;
+}
+
 .iv-calc-output {
     width: 5rem;
-    margin-right: 0.3rem;
+    /*margin-right: 0.3rem;*/
 }
 
 .iv-calc-output input {
@@ -53,62 +66,68 @@ h2 {
     /*width: 100%;*/
 }
 
+.nature-descriptor {
+    margin-left: 0.3rem;
+    font-size: 0.8rem;
+    margin-top: 0.1rem;
+}
+
 /* Styles for misc. inputs */
-#misc-container {
+.misc-container {
     width: 100%;
 }
 
-#misc-container div {
+.misc-container div {
 }
 
-#misc-container .iv-calc-label {
+.misc-container .iv-calc-label {
     width: 5rem;
 }
 
-#misc-container .iv-calc-input {
+.misc-container .iv-calc-input {
 }
 
-#misc-container #name-label {
+.misc-container .name-label {
     /*max-width: 33.33%;*/
     margin-right: 0.3rem;
 }
 
-#misc-container #name-input {
+.misc-container .name-input {
     width: 4rem;
     max-width: 33.33%;
-    margin-right: 0.5rem;
+    margin-right: 1rem;
 }
 
-#misc-container #name-select {
+.misc-container .name-select {
     /*max-width: 33.33%;*/
 }
 
-#misc-container #name-select select {
+.misc-container .name-select select {
 
 }
 
 /* Styles for stats input */
-#stats-container {
+.stats-container {
 
 }
 
-#stats-container .iv-calc-label {
+.stats-container .iv-calc-label {
 }
 
 /* Styles for EV input */
-#evs-container {
+.evs-container {
 }
 
-#evs-container .iv-calc-label {
+.evs-container .iv-calc-label {
     display: none;
 }
 
 /* Styles for IV output */
-#iv-ests-container .iv-calc-label {
+.iv-ests-container .iv-calc-label {
     display: none;
 }
 
-#iv-ests-container {
+.iv-ests-container {
 }
 
 /*@media screen and (min-width: 300px) {
@@ -120,7 +139,7 @@ h2 {
         max-width: 50%;
     }
 
-    #iv-ests-container .iv-calc-label {
+    .iv-ests-container .iv-calc-label {
         display: none;
     }
 }

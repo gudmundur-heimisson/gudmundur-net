@@ -47,6 +47,8 @@ var StatsEnum = {HP:   0,
                  SpDef:4, 
                  Spd:  5};
 
+var StatsNames = ["HP", "Atk", "Def", "SpAtk", "SpDef", "Spd"];
+
 function Nature(helpful, hindering) {
     if (helpful == hindering) {
         this.helpful = null;

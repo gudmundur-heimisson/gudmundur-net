@@ -15,6 +15,6 @@ $.ajax({
     url: "api/basestats",
     success: function( data ) {
         pokedata = data.objects;
-        controller = new IVEstimatorController($("#iv-calc"), pokedata);
+        controller = new IVEstimatorController($(".iv-calc"), pokedata);
     }
 });

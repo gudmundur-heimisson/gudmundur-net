@@ -70,7 +70,10 @@ def load_data():
                              speed = spd)
 
 def get_base_stats():
-    query = BaseStats.select(BaseStats, Pokemon, Form).join(Pokemon).switch(BaseStats).join(Form, join_type=pw.JOIN.LEFT_OUTER).order_by(BaseStats.id)
+    query = BaseStats.select(BaseStats, Pokemon, Form)\
+            .join(Pokemon).switch(BaseStats)\
+            .join(Form, join_type=pw.JOIN.LEFT_OUTER)\
+            .order_by(BaseStats.id)
     return [{"id": q.id,
             "dex": q.pokemon.dex,
             "name": q.pokemon.name, 

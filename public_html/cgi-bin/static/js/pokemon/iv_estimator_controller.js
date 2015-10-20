@@ -10,19 +10,21 @@ function IVEstimatorController(rootElement, data) {
     this.data = data;
     // Attach elements
     this.root = $(rootElement);
-    this.nameSearch = $("[name='name-search']", this.root);
-    this.name = $("[name='name']", this.root);
-    this.level = $("[name='level']", this.root);
-    this.nature = $("[name='nature']", this.root);
-    this.form = $("[name='form']", this.root);
-    this.characteristic = $("[name='characteristic']", this.root);
+    this.nameSearch = $(".name-search", this.root);
+    this.name = $(".name", this.root);
+    this.level = $(".level", this.root);
+    this.nature = $(".nature", this.root);
+    this.nature.helpful = $(".nature-helpful", this.root);
+    this.nature.hindering = $(".nature-hindering", this.root);
+    this.form = $(".form", this.root);
+    this.characteristic = $(".characteristic", this.root);
     this.stats = [];
     this.evs = [];
     this.ivEsts = [];
     for (var i=0; i<6; ++i) {
-        this.stats.push($("[name='stats-" + i + "']"));
-        this.evs.push($("[name='evs-" + i + "']"));
-        this.ivEsts.push($("[name='ivests-" + i + "']"));
+        this.stats.push($(".stats-" + i));
+        this.evs.push($(".evs-" + i));
+        this.ivEsts.push($(".ivests-" + i));
     }
     this.pokemon = new Pokemon();
     this.ivEstimator = new IVEstimator(this.pokemon);
@@ -55,8 +57,13 @@ function IVEstimatorController(rootElement, data) {
         changeTriggers[i].change(changeFun);
         changeTriggers[i].keyup(changeFun);
     }
+    this.nature.change(function(event) {
+        event.preventDefault();
+        obj.writeNatureDetails();
+    });
     // Read values
     this.readAll();
+    this.writeNatureDetails();
     this.ivEstimator.estimateAll();
     this.writeIVEsts();
 }
@@ -195,6 +202,16 @@ IVEstimatorController.prototype.readAll = function() {
     this.readEVs();
     this.readLevel();
     this.readCharacteristic();
+};
+
+IVEstimatorController.prototype.writeNatureDetails = function() {
+    if (this.pokemon.nature.neutral) {
+        this.nature.helpful.html("+None");
+        this.nature.hindering.html("-None");
+    } else {
+        this.nature.helpful.html("+" + StatsNames[this.pokemon.nature.helpful]);
+        this.nature.hindering.html("-" + StatsNames[this.pokemon.nature.hindering]);
+    }
 };
 
 IVEstimatorController.prototype.writeIVEsts = function() {
