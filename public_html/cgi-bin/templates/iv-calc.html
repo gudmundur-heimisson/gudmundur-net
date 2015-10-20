@@ -100,11 +100,9 @@
     {% endwith %}
 {% endblock %}
 {% block footer %}
-    <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_calc.js') }}"></script> -->
     <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_estimator_model.js') }}"></script>
-    <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_ui.js') }}"></script> -->
     <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_estimator_controller.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/test_iv_estimator.js') }}"></script>
+    <!--<script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/test_iv_estimator.js') }}"></script>-->
     <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_estimator.js') }}"></script>
     {{ super() }}
 {% endblock %}
