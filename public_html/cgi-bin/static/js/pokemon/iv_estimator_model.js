@@ -127,6 +127,17 @@ IVEstimate.prototype.mean = function() {
     return (this.lower + this.upper)/2;
 };
 
+IVEstimate.prototype.intersect = function(otherEst) {
+    var left = this;
+    var right = otherEst;
+    var join = new IVEstimate(null, null);
+    if (!(left.upper < right.lower || left.lower > right.upper)) {
+        join.lower = left.lower >= right.lower ? left.lower : right.lower;
+        join.upper = left.upper >= right.upper ? right.upper : left.upper;
+    }
+    return join;
+};
+
 function IVEstimator(pokemon) {
     this.pokemon = pokemon;
     this.ivEsts = new Array(6);
