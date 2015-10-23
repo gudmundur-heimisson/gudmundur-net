@@ -311,4 +311,6 @@ IVEstimateApp.prototype.removeLevelInputGroup = function() {
         this.ivEstimators.pop();
         this.pokemon.pop();
     }
+    this.estimateAll();
+    this.ivEstController.writeIVEsts();
 };
