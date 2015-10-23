@@ -5,11 +5,11 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/iv-calc.css') }}">
 {% endblock %}
 {% block content %}
-<div class="iv-calc">
+<div class="iv-calc center">
     <h1>Pokémon IV Calculator</h1>
     <div class="misc-container">
         <div class="header"><h2>Species</h2></div>
-        <div class="input-container name-container">
+        <div class="flex name-container">
             <div class="iv-calc-label name-label">
                 <label for="name-search">Name:</label>
             </div>
@@ -20,15 +20,7 @@
                 <select id="name" class="name"></select>
             </div>
         </div>
-        <div class="input-container level-container">
-            <div class="iv-calc-label level-label">
-                <label for="level">Level:</label>
-            </div>
-            <div class="iv-calc-input level-input">
-                <input class="level" id="level" type="number" min="1" max="100">
-            </div>
-        </div>
-        <div class="input-container nature-container">
+        <div class="flex nature-container">
             <div class="iv-calc-label nature-label">
                 <label for="nature">Nature:</label>
             </div>
@@ -41,7 +33,7 @@
             <div class="nature-hindering nature-descriptor">
             </div>
         </div>
-        <div class="input-container characteristic-container">
+        <div class="flex characteristic-container">
             <div class="iv-calc-label characteristic-label">
                 <label for="characteristic">Character:</label>
             </div>
@@ -50,7 +42,7 @@
                 </select>
             </div>
         </div>
-        <div class="input-container form-container">
+        <div class="flex form-container">
             <div class="iv-calc-label form-label">
                 <label for="form">Form:</label>
             </div>
@@ -60,60 +52,86 @@
             </div>
         </div>
     </div>
-    {% with tags, labels = (["hp", "atk", "def", "spatk", "spdef", "spd"], ["HP", "Atk", "Def", "SpAtk", "SpDef", "Spd"]) %}
-    <div class="inputs-group stats-container">
-        <div class="header-container">
-            <div class="header">
-                <h2>Stats</h2>
+    <div id="stats-io-grid" class="stats-io-grid flex">
+        {% with tags, labels = (["hp", "atk", "def", "spatk", "spdef", "spd"], ["HP", "Atk", "Def", "SpAtk", "SpDef", "Spd"]) %}
+        <div id="stats-input-grid" class="stats-input-grid flex">
+            <div class="level-inputs-group">
+                <div class="flex level-container">
+                    <div class="center flex">
+                        <div class="iv-calc-label level-label">
+                            <label for="level">Level:</label>
+                        </div>
+                        <div class="iv-calc-input level-input">
+                            <input class="level" id="level" type="number" min="1" max="100">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="inputs-group stats-container">
+                        <div class="header-container">
+                            <div class="header">
+                                <h2>Stats</h2>
+                            </div>
+                        </div>
+                        {% for i in range(6) %}
+                            <div  class="flex {{ tags[i] }}-stats-container">
+                                <div class="iv-calc-label {{ tags[i] }}-stat-label-container stat-label">
+                                    <label for="stats-{{ i }}">{{ labels[i] }}:</label>
+                                </div>
+                                <div class="stats-grid-input {{ tags[i] }}-stat-flex">
+                                    <input id="stats-{{ i }}" type="number" min="1" class="stats-{{ i }}">
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="inputs-group evs-container">
+                        <div class="header-container">
+                            <div class="header">
+                                <h2>EVs</h2>
+                            </div>
+                        </div>
+                        {% for i in range(6) %}
+                            <div class="flex {{ tags[i] }}-evs-container">
+                                <div class="iv-calc-label {{ tags[i] }}-ev-label-container">
+                                    <label for="evs-{{ i }}">{{ labels[i] }}:</label>
+                                </div>
+                                <div class="stats-grid-input {{ tags[i] }}-ev-flex">
+                                    <input id="evs-{{ i }}" type="number" min="0" max="255" value="0" class="evs-{{ i }}">
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="middle">
+                <div class="add-level-inputs-container">
+                    <button type="button" class="add-level-inputs-button">+Level</button>
+                </div>
+                <div class="remove-level-inputs-container">
+                    <button type="button" class="remove-level-inputs-button">-Level</button>
+                </div>
+            </div>
+            <div class="inputs-group iv-ests-container">
+                <div class="header-container">
+                    <div class="header">
+                        <h2>IVs</h2>
+                    </div>
+                </div>
+                {% for i in range(6) %}
+                    <div class="flex {{ tags[i] }}-iv-est-container">
+                        <div class="iv-calc-label {{ tags[i] }}-iv-est-label">
+                            <label for="ivests-{{ i }}">{{ labels[i] }}:</label>
+                        </div>
+                        <div class="iv-calc-output {{ tags[i] }}-iv-est-container">
+                            <input id="ivests-{{ i }}" type="text" class="ivests-{{ i }}" readonly>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
-        {% for i in range(6) %}
-            <div  class="input-container {{ tags[i] }}-stats-container">
-                <div class="iv-calc-label {{ tags[i] }}-stat-label-container">
-                    <label for="stats-{{ i }}">{{ labels[i] }}:</label>
-                </div>
-                <div class="stats-grid-input {{ tags[i] }}-stat-input-container">
-                    <input id="stats-{{ i }}" type="number" min="1" class="stats-{{ i }}">
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="inputs-group evs-container">
-        <div class="header-container">
-            <div class="header">
-                <h2>EVs</h2>
-            </div>
-        </div>
-        {% for i in range(6) %}
-            <div class="input-container {{ tags[i] }}-evs-container">
-                <div class="iv-calc-label {{ tags[i] }}-ev-label-container">
-                    <label for="evs-{{ i }}">{{ labels[i] }}:</label>
-                </div>
-                <div class="stats-grid-input {{ tags[i] }}-ev-input-container">
-                    <input id="evs-{{ i }}" type="number" min="0" max="255" value="0" class="evs-{{ i }}">
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="inputs-group iv-ests-container">
-        <div class="header-container">
-            <div class="header">
-                <h2>IVs</h2>
-            </div>
-        </div>
-        {% for i in range(6) %}
-            <div class="input-container {{ tags[i] }}-iv-est-container">
-                <div class="iv-calc-label {{ tags[i] }}-iv-est-label">
-                    <label for="ivests-{{ i }}">{{ labels[i] }}:</label>
-                </div>
-                <div class="iv-calc-output {{ tags[i] }}-iv-est-container">
-                    <input id="ivests-{{ i }}" type="text" class="ivests-{{ i }}" readonly>
-                </div>
-            </div>
-        {% endfor %}
+        {% endwith %}
     </div>
 </div>
-    {% endwith %}
 {% endblock %}
 {% block footer %}
     <script type="text/javascript" src="{{ url_for('static', filename='js/pokemon/iv_estimator_model.js') }}"></script>

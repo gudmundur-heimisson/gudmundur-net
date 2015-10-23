@@ -37,6 +37,22 @@ footer a {
     color: #0000FF;
 }
 
+.center {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flex {
+    display: flex;
+    flex-flow: row wrap;
+}
+
 #container {
     margin-top: 0.2rem;
     margin-left: auto;

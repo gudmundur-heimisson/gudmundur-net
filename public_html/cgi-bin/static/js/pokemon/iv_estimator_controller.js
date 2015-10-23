@@ -6,11 +6,10 @@ function populateSelect(select, array) {
     }
 }
 
-function PokemonController(rootElement, pokemon, data) {
+function PokemonController(rootElement, pokemon, data, statsRoot) {
     this.data = data;
     this.root = $(rootElement);
     this.name = $(".name", this.root);
-    this.level = $(".level", this.root);
     this.nature = $(".nature", this.root);
     this.nature.helpful = $(".nature-helpful", this.root);
     this.nature.hindering = $(".nature-hindering", this.root);
@@ -18,9 +17,11 @@ function PokemonController(rootElement, pokemon, data) {
     this.characteristic = $(".characteristic", this.root);
     this.stats = [];
     this.evs = [];
+    this.statsRoot = statsRoot ? statsRoot : rootElement
+    this.level = $(".level", this.statsRoot);
     for (var i=0; i<6; ++i) {
-        this.stats.push($(".stats-" + i, this.root));
-        this.evs.push($(".evs-" + i, this.root));
+        this.stats.push($(".stats-" + i, this.statsRoot));
+        this.evs.push($(".evs-" + i, this.statsRoot));
     }
     this.pokemon = pokemon;
 }
@@ -122,10 +123,14 @@ function IVEstimateApp(rootElement, data) {
     // Attach elements
     this.root = $(rootElement);
     this.nameSearch = $(".name-search", this.root);
-    this.pokemon = new Pokemon();
-    this.ivEstimator = new IVEstimator(this.pokemon);
-    this.pokeController = new PokemonController(this.root, this.pokemon, this.data);
-    this.ivEstController = new IVEstimatorController(this.root, this.ivEstimator);
+    this.statsGrid = $("#stats-io-grid", this.root);
+    this.levelInputGrid = $("#stats-input-grid", this.root);
+    this.addLevelButton = $(".add-level-inputs-button");
+    this.removeLevelButton = $(".remove-level-inputs-button");
+    this.pokemon = [new Pokemon()];
+    this.ivEstimators = [new IVEstimator(this.pokemon[0])];
+    this.pokeControllers = [new PokemonController(this.root, this.pokemon[0], this.data)];
+    this.ivEstController = new IVEstimatorController(this.root, new IVEstimator(this.pokemon));
     // Initialize forms
     this.populateNatures();
     this.populateNames();
@@ -138,33 +143,41 @@ function IVEstimateApp(rootElement, data) {
         obj.populateNames();
         obj.populateForms();
     });
-    this.pokeController.name.change(function(event) {
+    this.pokeControllers[0].name.change(function(event) {
         event.preventDefault();
         obj.populateForms();
     });
-    var changeTriggers = [this.pokeController.name, this.nameSearch, 
-                          this.pokeController.level, this.pokeController.nature,
-                          this.pokeController.form, this.pokeController.characteristic];
-    changeTriggers = changeTriggers.concat(this.pokeController.stats)
-                                   .concat(this.pokeController.evs);
+    var changeTriggers = [this.pokeControllers[0].name, this.nameSearch, 
+                          this.pokeControllers[0].level, this.pokeControllers[0].nature,
+                          this.pokeControllers[0].form, this.pokeControllers[0].characteristic];
+    changeTriggers = changeTriggers.concat(this.pokeControllers[0].stats)
+                                   .concat(this.pokeControllers[0].evs);
     var changeFun = function(event) {
         event.preventDefault();
-        obj.pokeController.readAll();
-        obj.ivEstimator.estimateAll();
+        obj.pokeControllers[0].readAll();
+        obj.estimateAll();
         obj.ivEstController.writeIVEsts();
     }
     for (var i=0; i<changeTriggers.length; ++i) {
         changeTriggers[i].change(changeFun);
         changeTriggers[i].keyup(changeFun);
     }
-    this.pokeController.nature.change(function(event) {
+    this.pokeControllers[0].nature.change(function(event) {
         event.preventDefault();
-        obj.pokeController.writeNatureDetails();
+        obj.pokeControllers[0].writeNatureDetails();
+    });
+    this.addLevelButton.click(function(event) {
+        event.preventDefault();
+        obj.addLevelInputGroup();
+    });
+    this.removeLevelButton.click(function(event) {
+        event.preventDefault();
+        obj.removeLevelInputGroup();
     });
     // Read values
-    this.pokeController.readAll();
-    this.pokeController.writeNatureDetails();
-    this.ivEstimator.estimateAll();
+    this.pokeControllers[0].readAll();
+    this.pokeControllers[0].writeNatureDetails();
+    this.estimateAll();
     this.ivEstController.writeIVEsts();
 }
 
@@ -202,7 +215,7 @@ IVEstimateApp.prototype.populateNames = function() {
             return name.text.match(pattern);
         });
     }
-    populateSelect(this.pokeController.name, subNames);
+    populateSelect(this.pokeControllers[0].name, subNames);
 };
 
 IVEstimateApp.prototype.populateNatures = function() {
@@ -214,11 +227,11 @@ IVEstimateApp.prototype.populateNatures = function() {
         if (a.text == b.text) return 0;
         return a.text < b.text ? -1 : 1;
     });
-    populateSelect(this.pokeController.nature, natures);
+    populateSelect(this.pokeControllers[0].nature, natures);
 };
 
 IVEstimateApp.prototype.populateForms = function() {
-    var id = this.pokeController.name.val();
+    var id = this.pokeControllers[0].name.val();
     var forms = [];
     if (id != null) {
         var basePokemon = this.data[id-1];
@@ -230,11 +243,11 @@ IVEstimateApp.prototype.populateForms = function() {
             pokemon = this.data[(++id)-1];
         }
     }
-    populateSelect(this.pokeController.form, forms);
+    populateSelect(this.pokeControllers[0].form, forms);
 };
 
 IVEstimateApp.prototype.populateCharacteristics = function() {
-    var chars = [];
+    var chars = [{"value":null, "text":""}];
     for (c in CharsMap) {
         chars.push({"text":c, "value":c});
     }
@@ -242,5 +255,60 @@ IVEstimateApp.prototype.populateCharacteristics = function() {
         if (a.text == b.text) return 0;
         return a.text < b.text ? -1 : 1;
     });
-    populateSelect(this.pokeController.characteristic, chars);
+    populateSelect(this.pokeControllers[0].characteristic, chars);
+};
+
+IVEstimateApp.prototype.estimateAll = function() {
+    var ivEstimator = this.ivEstimators[0];
+    ivEstimator.estimateAll();
+    var ivEsts = ivEstimator.ivEsts;
+    for (var i = 1; i < this.ivEstimators.length; ++i) {
+        ivEstimator = this.ivEstimators[i];
+        ivEstimator.estimateAll();
+        ivEsts = ivEstimator.intersectEstimates(ivEsts);
+    }
+    this.ivEstController.ivEstimator.ivEsts = ivEsts;
+};
+
+IVEstimateApp.prototype.addLevelInputGroup = function() {
+    var lastInputGroup = $(".level-inputs-group", this.levelInputGrid);
+    lastInputGroup = $(lastInputGroup[lastInputGroup.length-1]);
+    var newInputGroup = lastInputGroup.clone(true);
+    lastInputGroup.after(newInputGroup);
+    this.removeLevelButton.show();
+    var newPokemon = new Pokemon();
+    var newIVEstimator = new IVEstimator(newPokemon);
+    this.pokemon.push(newPokemon);
+    this.ivEstimators.push(newIVEstimator);
+    var newPokeController = new PokemonController(this.root, newPokemon,
+                                                  this.data, newInputGroup);
+    newPokeController.readAll();
+    this.pokeControllers.push(newPokeController);
+    var changeTriggers = [newPokeController.level];
+    changeTriggers = changeTriggers.concat(newPokeController.stats)
+                                   .concat(newPokeController.evs);
+    var obj = this;
+    var changeFun = function() {
+        newPokeController.readAll();
+        obj.estimateAll();
+        obj.ivEstController.writeIVEsts();
+    };
+    for (var i=0; i<changeTriggers.length; ++i) {
+        changeTriggers[i].change(changeFun);
+        changeTriggers[i].keyup(changeFun);
+    }
+};
+
+IVEstimateApp.prototype.removeLevelInputGroup = function() {
+    var lastInputGroup = $(".level-inputs-group", this.levelInputGrid);
+    if (lastInputGroup.length > 1) {
+        if (lastInputGroup.length == 2) {
+            this.removeLevelButton.hide();
+        }
+        lastInputGroup = $(lastInputGroup[lastInputGroup.length-1]);
+        lastInputGroup.remove();
+        this.pokeControllers.pop();
+        this.ivEstimators.pop();
+        this.pokemon.pop();
+    }
 };

@@ -196,3 +196,11 @@ IVEstimator.prototype.adjustForCharacteristic = function() {
         }
     }
 };
+
+IVEstimator.prototype.intersectEstimates = function(otherIVEstimates) {
+    var ivEsts = [];
+    for (var i=0; i<6; ++i) {
+        ivEsts.push(this.ivEsts[i].intersect(otherIVEstimates[i]));
+    }
+    return ivEsts;
+};

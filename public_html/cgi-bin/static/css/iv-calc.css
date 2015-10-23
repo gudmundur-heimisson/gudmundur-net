@@ -3,7 +3,7 @@ h1 {
 }
 
 h2 {
-    /*width: 100%;*/
+    margin-top: 0.5rem;
     margin-bottom: 0.3rem;
 }
 
@@ -16,23 +16,14 @@ h2 {
 }
 
 /* Styles for all inputs */
-.iv-calc {
-    display: flex;
-    flex-flow: row wrap;
-}
-
 .iv-calc-label {
     width: 4rem;
     margin-right: 0.3rem;
-}
-
-.iv-calc label {
-    float: right;
+    text-align: right;
 }
 
 .iv-calc-input {
     width: 4rem;
-    /*margin-right: 1rem;*/
 }
 
 .iv-calc-input input {
@@ -40,7 +31,7 @@ h2 {
 }
 
 .stats-grid-input {
-    width: 4rem;
+    width: 3.5rem;
 }
 
 .stats-grid-input input {
@@ -48,22 +39,36 @@ h2 {
 }
 
 .iv-calc-output {
-    width: 5rem;
-    /*margin-right: 0.3rem;*/
+    width: 3.5rem;
 }
 
 .iv-calc-output input {
     width: 100%;
 }
 
-.inputs-group {
-    /*width: 100%;*/
+
+.level-inputs-group {
+    margin-top: 1rem;
 }
 
-.input-container {
-    display: flex;
-    /*flex-flow: row wrap;*/
-    /*width: 100%;*/
+.level-inputs-group + .level-inputs-group  .iv-calc-label {
+    display: none;
+}
+
+.level-label {
+    width: auto;
+}
+
+.level-label {
+    float: none;
+}
+
+.level-input {
+    width: 3rem;
+}
+
+.remove-level-inputs-button {
+    display: none;
 }
 
 .nature-descriptor {
@@ -77,18 +82,11 @@ h2 {
     width: 100%;
 }
 
-.misc-container div {
-}
-
 .misc-container .iv-calc-label {
     width: 5rem;
 }
 
-.misc-container .iv-calc-input {
-}
-
 .misc-container .name-label {
-    /*max-width: 33.33%;*/
     margin-right: 0.3rem;
 }
 
@@ -96,10 +94,6 @@ h2 {
     width: 4rem;
     max-width: 33.33%;
     margin-right: 1rem;
-}
-
-.misc-container .name-select {
-    /*max-width: 33.33%;*/
 }
 
 .misc-container .name-select select {
@@ -111,13 +105,7 @@ h2 {
 
 }
 
-.stats-container .iv-calc-label {
-}
-
 /* Styles for EV input */
-.evs-container {
-}
-
 .evs-container .iv-calc-label {
     display: none;
 }
@@ -128,9 +116,12 @@ h2 {
 }
 
 .iv-ests-container {
+    margin-top: 2.3rem;
+    padding-left: 0.6rem;
 }
 
-/*@media screen and (min-width: 300px) {
+/*
+@media screen and (min-width: 300px) {
     html {
         font-size: 120%;
     }
@@ -142,11 +133,5 @@ h2 {
     .iv-ests-container .iv-calc-label {
         display: none;
     }
-}
-
-@media screen and (min-width: 400px) {
-}
-
-@media screen and (min-width: 800px) {
 }
 /*
