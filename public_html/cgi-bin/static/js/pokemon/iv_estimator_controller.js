@@ -282,6 +282,9 @@ IVEstimateApp.prototype.addLevelInputGroup = function() {
     this.ivEstimators.push(newIVEstimator);
     var newPokeController = new PokemonController(this.root, newPokemon,
                                                   this.data, newInputGroup);
+    $.each(newPokeController.stats, function(index, element) {
+        element.val(null);
+    });
     newPokeController.readAll();
     this.pokeControllers.push(newPokeController);
     var changeTriggers = [newPokeController.level];
