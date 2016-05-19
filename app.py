@@ -40,7 +40,7 @@ def iv_calc():
 
 @app.route("/test")
 def test():
-    return sys.executable
+    return sys.version
 
 @app.route("/api/basestats", methods=['GET'])
 def get_base_stats():
