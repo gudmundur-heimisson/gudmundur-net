@@ -1,3 +1,10 @@
-CREATE DATABASE gudmvlpz_pokemon_gen6;
-CREATE USER 'gudmvlpz_pokedb'@'localhost' IDENTIFIED BY 'v4545kr1m5l1';
-GRANT ALL ON *.* TO 'gudmvlpz_pokedb'@'localhost';
+﻿CREATE ROLE poke_user 
+WITH LOGIN ENCRYPTED PASSWORD 'md5189f75aa36752d75691a4cdf2567f9ae';
+
+CREATE DATABASE pokemon
+WITH OWNER = poke_user;
+
+CREATE SCHEMA gen6 AUTHORIZATION poke_user;
+
+ALTER ROLE poke_user
+SET search_path TO '$user', 'gen6', 'public';

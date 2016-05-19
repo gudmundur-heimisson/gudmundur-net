@@ -2,10 +2,10 @@ import csv
 import peewee as pw
 import codecs
 
-db = pw.MySQLDatabase('gudmvlpz_pokemon',
-                      user='gudmvlpz_pokedb', 
-                      password='v4545kr1m5l1',
-                      charset='utf8')
+db = pw.PostgresqlDatabase('pokemon',
+                           user='poke_user', 
+                           host='localhost',
+                           password='v4545kr1m5l1')
 
 class PokeModel(pw.Model):
     class Meta:
@@ -30,44 +30,6 @@ class BaseStats(PokeModel):
     special_attack = pw.IntegerField()
     special_defense = pw.IntegerField()
     speed = pw.IntegerField()
-
-def create_tables():
-    db.connect()
-    db.create_tables([Pokemon, Form, BaseStats])
-
-def drop_tables():
-    db.connect()
-    db.drop_tables([Pokemon, Form, BaseStats])
-
-def reload_tables():
-    db.connect()
-    db.drop_tables([Pokemon, Form, BaseStats])
-    db.create_tables([Pokemon, Form, BaseStats])
-
-def load_data():
-    db.connect()
-    with codecs.open('./data/forms.csv', 'r', 'utf8') as infile:
-        # reader = csv.reader(infile, delimiter=',')
-        header = next(infile)
-        lastName = None
-        for line in infile:
-            row = line.split(',')
-            dex, name, form = row[:3]
-            stats = row[3:]
-            form = None if form == '' else form
-            hp, atk, df, spatk, spdef, spd = stats
-            if lastName != name:
-                pokemon = Pokemon.create(dex=dex, name=name)
-                lastName = name
-            if form is not None:
-                form = Form.create(pokemon=pokemon, name=form)
-            BaseStats.create(pokemon=pokemon, form=form,
-                             health_points = hp,
-                             attack = atk,
-                             defense = df,
-                             special_attack = spatk,
-                             special_defense = spdef,
-                             speed = spd)
 
 def get_base_stats():
     query = BaseStats.select(BaseStats, Pokemon, Form)\
