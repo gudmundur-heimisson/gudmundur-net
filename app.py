@@ -1,8 +1,13 @@
 import sys
 import models
-from flask import Flask, render_template, g, jsonify
+import flask
+from flask import Flask, g, jsonify
 
 app = Flask(__name__)
+
+def render_template(*args, **kwargs):
+    version = '{0.major}.{0.minor}.{0.micro}'.format(sys.version_info)
+    return flask.render_template(*args, version=version, **kwargs)
 
 @app.before_request
 def before_request():
