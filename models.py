@@ -38,8 +38,8 @@ def get_base_stats():
             .order_by(BaseStats.id)
     return [{"id": q.id,
             "dex": q.pokemon.dex,
-            "name": q.pokemon.name, 
-            "form": q.form.name, 
+            "name": q.pokemon.name,
+            "form": q.form.name if q.form is not None else None, 
             "health_points": q.health_points, 
             "attack": q.attack, 
             "defense": q.defense, 
