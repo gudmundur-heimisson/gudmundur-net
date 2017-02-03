@@ -1,11 +1,15 @@
+import os
 import csv
-import peewee as pw
 import codecs
+import peewee as pw
+
+username = os.environ['POKE_DB_USER']
+password = os.environ['POKE_DB_PWD']
 
 db = pw.PostgresqlDatabase('pokemon',
-                           user='poke_user', 
+                           user=username, 
                            host='localhost',
-                           password='v4545kr1m5l1')
+                           password=password)
 
 class PokeModel(pw.Model):
     class Meta:
