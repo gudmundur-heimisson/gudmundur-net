@@ -1,89 +1,119 @@
-id	pokemon_id	name
-1	3	Mega
-2	6	Mega X
-3	6	Mega Y
-4	9	Mega
-5	15	Mega
-6	18	Mega
-7	65	Mega
-8	80	Mega
-9	94	Mega
-10	115	Mega
-11	127	Mega
-12	130	Mega
-13	142	Mega
-14	150	Mega X
-15	150	Mega Y
-16	181	Mega
-17	208	Mega
-18	212	Mega
-19	214	Mega
-20	229	Mega
-21	248	Mega
-22	254	Mega
-23	257	Mega
-24	260	Mega
-25	282	Mega
-26	302	Mega
-27	303	Mega
-28	306	Mega
-29	308	Mega
-30	310	Mega
-31	319	Mega
-32	323	Mega
-33	334	Mega
-34	354	Mega
-35	359	Mega
-36	362	Mega
-37	373	Mega
-38	376	Mega
-39	380	Mega
-40	381	Mega
-41	382	Primal
-42	383	Primal
-43	384	Mega
-44	386	Attack Forme
-45	386	Defense Forme
-46	386	Speed Forme
-47	413	Plant Cloak
-48	413	Sandy Cloak
-49	413	Trash Cloak
-50	428	Mega
-51	445	Mega
-52	448	Mega
-53	460	Mega
-54	475	Mega
-55	479	Heat
-56	479	Wash
-57	479	Frost
-58	479	Fan
-59	479	Mow
-60	487	Altered Forme
-61	487	Origin Forme
-62	492	Land Forme
-63	492	Sky Forme
-64	531	Mega
-65	555	Zen Mode
-66	641	Incarnate Forme
-67	641	Therian Forme
-68	642	Incarnate Forme
-69	642	Therian Forme
-70	645	Incarnate Forme
-71	645	Therian Forme
-72	646	Black
-73	646	White
-74	648	Aria Forme
-75	648	Pirouette Forme
-76	681	Shield Forme
-77	681	Blade Forme
-78	710	Small Size
-79	710	Average Size
-80	710	Large Size
-81	710	Super Size
-82	711	Small Size
-83	711	Average Size
-84	711	Large Size
-85	711	Super Size
-86	719	Mega
-87	720	Confined
-88	720	Unbound
+1	3	Mega Venusaur
+2	6	Mega Charizard X
+3	6	Mega Charizard Y
+4	9	Mega Blastoise
+5	15	Mega Beedrill
+6	18	Mega Pidgeot
+7	19	Alolan Rattata
+8	20	Alolan Raticate
+9	26	Alolan Raichu
+10	27	Alolan Sandshrew
+11	28	Alolan Sandslash
+12	37	Alolan Vulpix
+13	38	Alolan Ninetales
+14	50	Alolan Diglett
+15	51	Alolan Dugtrio
+16	52	Alolan Meowth
+17	53	Alolan Persian
+18	65	Mega Alakazam
+19	74	Alolan Geodude
+20	75	Alolan Graveler
+21	76	Alolan Golem
+22	80	Mega Slowbro
+23	88	Alolan Grimer
+24	89	Alolan Muk
+25	94	Mega Gengar
+26	103	Alolan Exeggutor
+27	105	Alolan Marowak
+28	115	Mega Kangaskhan
+29	127	Mega Pinsir
+30	130	Mega Gyarados
+31	142	Mega Aerodactyl
+32	150	Mega Mewtwo X
+33	150	Mega Mewtwo Y
+34	181	Mega Ampharos
+35	208	Mega Steelix
+36	212	Mega Scizor
+37	214	Mega Heracross
+38	229	Mega Houndoom
+39	248	Mega Tyranitar
+40	254	Mega Sceptile
+41	257	Mega Blaziken
+42	260	Mega Swampert
+43	282	Mega Gardevoir
+44	302	Mega Sableye
+45	303	Mega Mawile
+46	306	Mega Aggron
+47	308	Mega Medicham
+48	310	Mega Manectric
+49	319	Mega Sharpedo
+50	323	Mega Camerupt
+51	334	Mega Altaria
+52	354	Mega Banette
+53	359	Mega Absol
+54	362	Mega Glalie
+55	373	Mega Salamence
+56	376	Mega Metagross
+57	380	Mega Latias
+58	381	Mega Latios
+59	382	Primal Kyogre
+60	383	Primal Groudon
+61	384	Mega Rayquaza
+62	386	Normal Forme
+63	386	Attack Forme
+64	386	Defense Forme
+65	386	Speed Forme
+66	413	Plant Cloak
+67	413	Sandy Cloak
+68	413	Trash Cloak
+69	428	Mega Lopunny
+70	445	Mega Garchomp
+71	448	Mega Lucario
+72	460	Mega Abomasnow
+73	475	Mega Gallade
+74	479	Heat Rotom
+75	479	Wash Rotom
+76	479	Frost Rotom
+77	479	Fan Rotom
+78	479	Mow Rotom
+79	487	Altered Forme
+80	487	Origin Forme
+81	492	Land Forme
+82	492	Sky Forme
+83	531	Mega Audino
+84	555	Standard Mode
+85	555	Zen Mode
+86	641	Incarnate Forme
+87	641	Therian Forme
+88	642	Incarnate Forme
+89	642	Therian Forme
+90	645	Incarnate Forme
+91	645	Therian Forme
+92	646	Normal Kyurem
+93	646	Black Kyurem
+94	646	White Kyurem
+95	648	Aria Forme
+96	648	Pirouette Forme
+97	658	Ash-Greninja
+98	681	Shield Forme
+99	681	Blade Forme
+100	710	Small Size
+101	710	Average Size
+102	710	Large Size
+103	710	Super Size
+104	711	Small Size
+105	711	Average Size
+106	711	Large Size
+107	711	Super Size
+108	718	50% Forme
+109	718	10% Forme
+110	718	Complete Forme
+111	719	Mega Diancie
+112	720	Hoopa Confined
+113	720	Hoopa Unbound
+114	745	Midday Form
+115	745	Midnight Form
+116	746	Solo Form
+117	746	School Form
+118	774	Meteor Form
+119	774	Core Form

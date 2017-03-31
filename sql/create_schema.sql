@@ -1,4 +1,4 @@
-CREATE SCHEMA gen6 AUTHORIZATION poke_user;
+CREATE SCHEMA gen7 AUTHORIZATION poke_user;
 
 ALTER ROLE poke_user
-SET search_path TO '$user', 'gen6', 'public';
+SET search_path TO '$user', 'gen7';
