@@ -17,5 +17,5 @@ COPY gen7.basestats
   WITH (FORMAT csv,
         ENCODING 'utf8',
         DELIMITER E'\t',
-        HEADER true,
+        HEADER false,
         NULL '');
