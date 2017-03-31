@@ -932,6 +932,7 @@ with io.StringIO(data) as instream:
         basestats_writer.writerow([_id, pokemon_id, forme_id if forme else None, hp, atk, _def, spatk, spdef, spd])
         if previous_pokemon_id != pokemon_id:
             pokemon_writer.writerow([pokemon_id, name])
+        previous_pokemon_id = pokemon_id
 
 with open('form.csv', 'w') as form_file,\
      open('basestats.csv', 'w') as basestats_file,\
