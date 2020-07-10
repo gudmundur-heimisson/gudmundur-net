@@ -1,7 +1,8 @@
+// This server is for local development, since at the moment
+// all the assets are static I just use nginx.
 package main
 
 import (
-//	"fmt"
 	"log"
 	"net/http"
 )
