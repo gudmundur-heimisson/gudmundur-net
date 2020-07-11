@@ -33,10 +33,19 @@
 </head>
 <body>
   <header>
-  <nav class="green darken-4" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Guðmundur Heimisson</a>
+  <nav class="green darken-4">
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo">Guðmundur Heimisson</a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="left hide-on-med-and-down">
+        <li><a href="/index.html">Home</a></li>
+      </ul>
     </div>
   </nav>
+
+  <ul class="sidenav" id="mobile-demo">
+    <li><a href="/index.html">Home</a></li>
+  </ul>
 </header>
 
 <main>
@@ -52,7 +61,7 @@
   <div class="container">
     <div class="section">
       <div class="row center">
-        <h5 class="header col s12 light">LinkedIn: <a href="https://gudmundur.heimisson/in/gheimis">linked.in/in/gheimis</a> </h5>
+        <h5 class="header col s12 light">LinkedIn: <a href="https://linkedin.com/in/gheimis">linked.in/in/gheimis</a> </h5>
       </div>
     </div>
   </div>
@@ -66,6 +75,7 @@
       </div>
     </div>
   </footer>
-  <script src="js/materialize.js"/>
+  <script src="/js/materialize.js"></script>
+  <script src="/js/common.js"></script>
 </body>
 </html>
