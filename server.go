@@ -67,8 +67,10 @@ func serve() {
 	http.Handle("/js/", http.StripPrefix("/js/", js_fs))
 	http.Handle("/favicon/", http.StripPrefix("/favicon/", favicon_fs))
 	for page, _ := range pages {
-		http.HandleFunc("/"+page, func(w http.ResponseWriter, r *http.Request) {
-			http.ServeFile(w, r, path.Join("pages", page))
+		http.HandleFunc("/" + page + ".html", func(w http.ResponseWriter, r *http.Request) {
+			pagePath := path.Join("pages", page) + ".html"
+			fmt.Printf("Serving %s", pagePath)
+			http.ServeFile(w, r, pagePath)
 		})
 	}
 	http.HandleFunc("/", handle404)
