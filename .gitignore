@@ -1,6 +1,2 @@
-*.pyc
-.project
-.pydevproject
-env
-mysql_export
+server
 pages/
