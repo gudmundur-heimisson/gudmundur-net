@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strings"
 	"text/template"
-	// "net/url"
+	"flag"
 	"bytes"
 	"fmt"
 	"io/ioutil"
@@ -17,8 +17,11 @@ import (
 
 var pages = make(map[string]string)
 
+var generate = flag.Bool("generate", false, "Generate templates")
+
 // Initialize page contents from layout template
 func init() {
+	flag.Parse()
 	layoutBytes, err := ioutil.ReadFile("./layout.html")
 	if err != nil {
 		log.Fatal(err)
@@ -76,14 +79,17 @@ func generateTemplates() {
 	dirname := "pages"
 	os.Mkdir(dirname, 0755)
 	for page, contents := range pages {
-		filename := path.Join(dirname, page)
-		// filename += ".html"
+		filename := path.Join(dirname, page) + ".html"
 		fmt.Println(filename)
 		ioutil.WriteFile(filename, []byte(contents), 0655)
 	}
 }
 
 func main() {
-	// generateTemplates()
-	serve()
+	fmt.Println(*generate)
+	if (*generate) {
+		generateTemplates()
+	} else {
+		serve()
+	}
 }
