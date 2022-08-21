@@ -26,15 +26,6 @@ type PageInfo struct {
 	out      string
 }
 
-var pages = make(map[string]PageInfo)
-
-func generateTemplates() {
-	for _, page := range pages {
-		os.WriteFile(page.out, []byte(page.contents), 0655)
-		fmt.Println("written")
-	}
-}
-
 func main() {
 	var template_files StringArrayFlag
 	var out_files StringArrayFlag
@@ -57,6 +48,7 @@ func main() {
 	layout = template.Must(layout.Parse(string(layoutBytes)))
 	var buf bytes.Buffer
 	// apply the layout to each template
+	var pages = make(map[string]PageInfo)
 	for idx, template_file := range template_files {
 		fileInfo, err := os.Stat(template_file)
 		if err != nil {
@@ -74,5 +66,8 @@ func main() {
 		}
 		buf.Reset()
 	}
-	generateTemplates()
+	for _, page := range pages {
+		os.WriteFile(page.out, []byte(page.contents), 0655)
+		fmt.Println("written")
+	}
 }
