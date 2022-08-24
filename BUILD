@@ -48,9 +48,9 @@ download_pkgs(
 
 install_pkgs(
     name = "python_pkgs_image",
-    image_tar = "@distroless_base_debian11_debug//image",
+    image_tar = "@debian11_slim//image",
     installables_tar = ":python_pkgs.tar",
-    # installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
+    installation_cleanup_commands = "rm -rf /var/lib/apt/lists/*",
     output_image_name = "python_pkgs_image",
 )
 
